@@ -1,0 +1,87 @@
+﻿
+@{
+    ViewBag.Title = "SignUp";
+    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+}
+<style>
+    section, .section-padding{
+        padding : 0;
+    }
+    label{
+        font-weight : 500;
+        margin-bottom : 0;
+    }
+    .form-control{
+        border-radius : 0.3rem;
+    }
+</style>
+<section>
+    <div class="mask d-flex align-items-center">
+        <div class="container">
+            <div class="row d-flex justify-content-center align-items-center">
+                <div class="col-12 col-md-9 col-lg-7 col-xl-6">
+                    <div>
+                        <div class="card-body">
+                            <h4 class="text-uppercase text-center">ĐĂNG KÝ TÀI KHOẢN</h4>
+                            @using (Html.BeginForm())
+                            {
+                        <form>
+                            <div class="form-outline mb-2">
+                                <label class="form-label" for="form3Example1cg">Họ và tên</label>
+                                @Html.TextBox("Ten", null, new { @class = "form-control form-control-lg", placeholder = "Tên đăng nhập" })
+                                <div>@ViewData["err2"]</div>
+
+
+                            </div>
+                            <div class="form-outline mb-2">
+                                <label class="form-label" for="form3Example1cg">Tên đăng nhập</label>
+                                @Html.TextBox("TenDN", null, new { @class = "form-control form-control-lg", placeholder = "Tên đăng nhập" })
+                                <div>@ViewData["err2"]</div>
+
+
+                            </div>
+
+                            <div class="form-outline mb-2">
+                                <label class="form-label" for="form3Example3cg">Email</label>
+                                @Html.TextBox("Email", null, new { @class = "form-control form-control-lg", placeholder = "Email" })
+                                <div> @ViewData["err5"]</div>
+
+                            </div>
+
+                            <div class="form-outline mb-2">
+                                <label class="form-label" for="form3Example4cg">Mật khẩu</label>
+                                @Html.Password("MatKhau", null, new { @class = "form-control form-control-lg", placeholder = "Mật khẩu" })
+                                <div>@ViewData["err3"]</div>
+
+                            </div>
+
+                            <div class="form-outline mb-2">
+                                <label class="form-label" for="form3Example4cdg">Nhập lại mật khẩu</label>
+                                @Html.Password("MatKhauNL", null, new { @class = "form-control form-control-lg", placeholder = "Nhập lại mật khẩu" })
+                                <div>@ViewData["err4"]</div>
+
+                            </div>
+
+                            <div class="d-flex justify-content-center mt-3">
+                                <button type="submit"
+                                        class="btn btn-primary btn-block btn-lg form-control-lg form-control">
+                                    ĐĂNG KÝ
+                                </button>
+                            </div>
+
+                            <p class="text-center text-muted mt-3 mb-0">
+                                Đã có tài khoản ? <a href="/User/Login"
+                                                     class="fw-bold text-body"><u>Đăng nhập</u></a>
+                            </p>
+
+                        </form>
+                            }
+                            </div>
+                         
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+

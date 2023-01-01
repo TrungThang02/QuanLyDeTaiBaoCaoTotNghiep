@@ -1,0 +1,9 @@
+﻿
+<ul class="dropdown-menu" role="menu">
+    @foreach (var dt in ViewBag.detai)
+    {
+        <li><a href="/Home/DanhMucBaoCao/@dt.FacultyID">@dt.FacultyName</a></li>
+    }
+
+
+</ul>

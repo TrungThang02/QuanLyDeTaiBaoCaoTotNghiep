@@ -1,0 +1,44 @@
+﻿
+@{ var kh = Session["TaiKhoan"]; }
+@{ var ten = Session["TaiKhoan2"]; }
+
+
+@if (Session["TaiKhoan"] == null)
+{
+
+    <ul class="header-links pull-right">
+        <li><a href="~/User/Login?id=1"><i class="fa fa-user-o"></i>Tài khoản</a></li>
+    </ul>
+
+}
+else
+{
+
+    <div class="dropdown flex-column">
+        <div class="dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <a href="@Url.Action("QuanLiThongTin","User")" style="color:blue;font-size : 12px; font-weight : 600"><span class="fa fa-user"></span> Xin chào: @ten</a>
+        </div>
+        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+            <div class="info">
+                <li><a href="/User/ThayDoiThongTin/@kh">Đổi thông tin</a></li>
+
+                <li><a href="/GioHang/LichSuMuaHang/@kh">Lịch sử mua hàng</a></li>
+
+                <li>
+                    <a href="@Url.Action("DangXuat","User")">
+                        <span class="fa fa-sign-out "></span> Đăng xuất
+
+                    </a>
+                </li>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+
+
+
+}
