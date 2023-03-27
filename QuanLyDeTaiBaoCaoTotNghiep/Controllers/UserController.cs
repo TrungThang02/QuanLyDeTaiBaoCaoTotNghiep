@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Data.Entity.Validation;
 using System.Linq;
 using System.Net;
+using System.Net.Mail;
 using System.Security.Cryptography;
 using System.Text;
 using System.Web;
@@ -12,8 +14,17 @@ using QuanLyDeTaiBaoCaoTotNghiep.Models;
 
 namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
 {
+    [HandleError]
+
     public class UserController : Controller
     {
+
+        static int id = 0;
+
+        public int getid()
+        {
+            return id;
+        }
         QuanLyDeTaiBCTNSVEntities db = new QuanLyDeTaiBCTNSVEntities();
         // GET: User
         public static string Encrypt(string password)
@@ -39,6 +50,8 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
 
             return View();
         }
+
+        
         [HttpPost]
         public ActionResult Login(FormCollection collection)
         {
@@ -83,16 +96,20 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
 
                         Session["TaiKhoan2"] = nguoidung.Name;
 
+                        Session["TaiKhoan3"] = nguoidung.ID;
+
+                        id = nguoidung.ID;
+
                         if (nguoidung == ADMIN)
                         {
                             Session.Clear();
 
                             Session["ADMIN"] = ADMIN;
-                            return RedirectToAction("Index2", "Home");
+                            return RedirectToAction("Index", "Admin/Homes", "Areas");
                         }
                         else
                         {
-                            return RedirectToAction("Index", "Home");
+                            return RedirectToAction("Index", "Documents");
                           
                         }
 
@@ -119,62 +136,262 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
         [HttpPost]
         public ActionResult SignUp(FormCollection collection, Users nguoidung)
         {
-            var sTen = collection["Ten"];
-            var sTenDN = collection["TenDN"];
-            var sEmail = collection["Email"];
-            var sMatKhau = Encrypt(collection["MatKhau"].ToString());
-            var sNhapLaiMatKhau = collection["MatKhauNL"];
-                  
-            if (String.IsNullOrEmpty(sTenDN))
+            var response = Request["g-recaptcha-response"];
+            string secretKey = "6Let3L0jAAAAAPx3bZRlTYo3gt-0rfbbrmCFIsvk";
+            var client = new WebClient();
+
+            var result = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secretKey, response));
+
+            var obj = JObject.Parse(result);
+            var status = (bool)obj.SelectToken("success");
+            ViewBag.Message = status ? "Xác thực Google reCaptcha thành công !" : "Bạn chưa xác thực Google reCaptcha";
+
+
+            if (ModelState.IsValid && status)
             {
-                ViewData["err2"] = "Tên đăng nhập không được để trống";
-            }
-            else if (String.IsNullOrEmpty(sEmail))
-            {
-                ViewData["err6"] = "Email không được để trống";
-            }
-            else if (String.IsNullOrEmpty(sMatKhau))
-            {
-                ViewData["err3"] = "Mật khẩu không được để trống";
-            }
-            else if (String.IsNullOrEmpty(sNhapLaiMatKhau))
-            {
-                ViewData["err4"] = "Phải nhập lại mật khẩu";
-            }
-            
-        
-            else if (db.Users.SingleOrDefault(n => n.UserName == sTenDN) != null)
-            {
-                ViewData["err8"] = "Tên đăng nhâp đã tồn tại";
-            }
-            else if (db.Users.SingleOrDefault(n => n.Email == sEmail) != null)
-            {
-                ViewData["err9"] = "Email đã được sử dụng";
+                var sTen = collection["Ten"];
+                var sTenDN = collection["TenDN"];
+                var sEmail = collection["Email"];
+                var sMatKhau = Encrypt(collection["MatKhau"].ToString());
+                var sNhapLaiMatKhau = collection["MatKhauNL"];
+
+                if (String.IsNullOrEmpty(sTenDN))
+                {
+                    ViewData["err2"] = "Tên đăng nhập không được để trống";
+                }
+                else if (String.IsNullOrEmpty(sEmail))
+                {
+                    ViewData["err6"] = "Email không được để trống";
+                }
+                else if (String.IsNullOrEmpty(sMatKhau))
+                {
+                    ViewData["err3"] = "Mật khẩu không được để trống";
+                }
+                else if (String.IsNullOrEmpty(sNhapLaiMatKhau))
+                {
+                    ViewData["err4"] = "Phải nhập lại mật khẩu";
+                }
+
+
+                else if (db.Users.SingleOrDefault(n => n.UserName == sTenDN) != null)
+                {
+                    ViewData["err8"] = "Tên đăng nhâp đã tồn tại";
+                }
+                else if (db.Users.SingleOrDefault(n => n.Email == sEmail) != null)
+                {
+                    ViewData["err9"] = "Email đã được sử dụng";
+                }
+                else
+                {
+                    try
+                    {
+                        nguoidung.Name = sTen;
+                        nguoidung.UserName = sTenDN;
+                        nguoidung.PassWord = sMatKhau;
+                        nguoidung.Email = sEmail;
+
+                        db.Users.Add(nguoidung);
+                        db.SaveChanges();
+                    }
+                    catch (DbEntityValidationException e)
+                    {
+                        Console.WriteLine(e);
+                    }
+                    return RedirectToAction("Login", "User");
+                }
+              
             }
             else
             {
-                try
-                {
-                    nguoidung.Name = sTen;
-                    nguoidung.UserName = sTenDN;
-                    nguoidung.PassWord = sMatKhau;
-                    nguoidung.Email = sEmail;
-        
-                    db.Users.Add(nguoidung);
-                    db.SaveChanges();
-                }
-                catch (DbEntityValidationException e)
-                {
-                    Console.WriteLine(e);
-                }
-                return RedirectToAction("Login", "User");
+                ViewBag.ThongBao = "Tên đăng nhập hoặc mật khẩu không đúng";
+                ViewBag.Message = status ? "Xác thực Google reCaptcha thành công !" : "Bạn chưa xác thực Google reCaptcha";
+
             }
             return this.SignUp();
+
         }
+
         public ActionResult LoginLogOutPartial()
         {
 
             return PartialView();
         }
+        public ActionResult DangXuat()
+        {
+            Session.Clear();
+            return RedirectToAction("Index", "Documents");
+        }
+        public ActionResult QuanTriNguoiDung(int ?id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Users user = db.Users.Find(id);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+        [NonAction]
+        public void SendVerificationLinkEmail(string email, string activationCode, string emailFor = "VerifyAccount")
+        {
+            var verifyUrl = "/User/" + emailFor + "/" + activationCode;
+            var link = Request.Url.AbsoluteUri.Replace(Request.Url.PathAndQuery, verifyUrl);
+
+            var fromEmail = new MailAddress("trantrungthang01699516993@gmail.com", "Hệ thống quản lí đề tài báo cáo tốt nghiệp -  TDMU");
+            var toEmail = new MailAddress(email);
+
+            string subject = "";
+            string body = "";
+
+            if (emailFor == "VerifyAccount")
+            {
+                subject = "Your account is successfully created";
+                body = "<br /><br /> We are  <a href='" + link + "'>" + link + "</a>";
+            }
+            else if (emailFor == "ResetPassword")
+            {
+                subject = "KHÔI PHỤC MẬT KHẨU";
+                body = "Chúng tôi xác nhận tài khoản này thuộc về bạn, vui lòng ấn vào <a href='" + link + "'> Khôi phục mật khẩu </a>";
+            }
+
+            var smtp = new SmtpClient
+            {
+                Host = "smtp.gmail.com",
+                Port = 587,
+                EnableSsl = true,
+                DeliveryMethod = SmtpDeliveryMethod.Network,
+                UseDefaultCredentials = true,
+                Credentials = new NetworkCredential(fromEmail.Address, "iauopfthcsrhnunj")
+            };
+            using (var message = new MailMessage(fromEmail, toEmail)
+            {
+                Subject = subject,
+                Body = body,
+                IsBodyHtml = true
+            })
+                smtp.Send(message);
+
+
+
+        }
+        public ActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+
+        [HttpPost]
+        public ActionResult ForgotPassword(string Email)
+        {
+            string message = "";
+            bool status = false;
+            var account = db.Users.Where(a => a.Email == Email).FirstOrDefault();
+            if (account != null)
+            {
+                string resetCode = Guid.NewGuid().ToString();
+                SendVerificationLinkEmail(account.Email, resetCode, "ResetPassword");
+                account.ResetPasswordCode = resetCode;
+                db.SaveChanges();
+                message = "Liên kết khôi phục mật khẩu đã được gửi đến email của bạn <3";
+            }
+            else
+            {
+                message = "Không tìm thấy email";
+            }
+            ViewBag.Message = message;
+            return View();
+        }
+
+        public ActionResult ResetPassword(string id)
+        {
+            var user = db.Users.Where(a => a.ResetPasswordCode == id).FirstOrDefault();
+            if (user != null)
+            {
+                ResetPassword model = new ResetPassword();
+                model.ResetCode = id;
+                return View(model);
+            }
+            else
+            {
+                return HttpNotFound();
+            }
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult ResetPassword(ResetPassword model)
+        {
+            var message = "";
+            if (ModelState.IsValid)
+            {
+                var user = db.Users.Where(a => a.ResetPasswordCode == model.ResetCode).FirstOrDefault();
+                if (user != null)
+                {
+                    user.PassWord = Encrypt(model.NewPassword);
+                    user.ResetPasswordCode = "";
+                    db.Configuration.ValidateOnSaveEnabled = false;
+                    db.SaveChanges();
+                    message = "Thay đổi mật khẩu thành công";
+
+                }
+                return RedirectToAction("Login", "User");
+            }
+            else
+            {
+                message = "Lỗi !";
+            }
+            ViewBag.Message = message;
+            return View(model);
+        }
+
+
+        public ActionResult Quanlibaocao(int ? id)
+        {
+            var bc = from s in db.GraduationReport where s.ID == id select s;
+            return View(bc);
+        }
+
+
+        public ActionResult Thaydoithongtin(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            Users users = db.Users.Find(id);
+            if (users == null)
+            {
+                return HttpNotFound();
+            }
+            ViewBag.ClassID = new SelectList(db.Class, "ClassID", "ClassName", users.ClassID);
+            ViewBag.FacultyID = new SelectList(db.Faculty, "FacultyID", "FacultyName", users.FacultyID);
+            ViewBag.YearID = new SelectList(db.AcademicYear, "YearID", "Name", users.YearID);
+            return View(users);
+        }
+
+        // POST: Admin/Users/Edit/5
+        // To protect from overposting attacks, enable the specific properties you want to bind to, for 
+        // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public ActionResult Thaydoithongtin([Bind(Include = "ID,Name,Age,Address,UserName,Email,Phone,Password, ClassID,FacultyID,YearID")] Users users)
+        {
+            if (ModelState.IsValid)
+            {
+                db.Entry(users).State = EntityState.Modified;
+                db.SaveChanges();
+                Session.Remove("TaiKhoan2");
+                Session["TaiKhoan2"] = users.Name;
+                return RedirectToAction("Index","Documents");
+            }
+            ViewBag.ClassID = new SelectList(db.Class, "ClassID", "ClassName", users.ClassID);
+            ViewBag.FacultyID = new SelectList(db.Faculty, "FacultyID", "FacultyName", users.FacultyID);
+            ViewBag.YearID = new SelectList(db.AcademicYear, "YearID", "Name", users.YearID);
+            return View(users);
+        }
+
+       
     }
 }

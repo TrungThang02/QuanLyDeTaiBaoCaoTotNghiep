@@ -1,0 +1,38 @@
+﻿
+<div class="container">
+
+    <div class="search-form" style="
+                                                padding :40px;
+                                                background : #fff5;
+                                                border-radius : 10px;
+
+                                    ">
+        <form class="form" method="post" name="form1" action="/Search/Loc">
+            @*<div class="input-group">
+            <input type="text" class="form-control searchInput" placeholder="Nhập tên tài liệu cần tìm..." aria-label="Search" style="border-radius : 5px 0 0 5px ; background :#fff;">
+            <div class="input-group-append options">
+
+                <select class="btn btn-secondary dropdown-toggle" name="scp.scps" id="exlidSearchIn">
+                    <option selected="selected">Chọn Khoa - Viện</option>
+                    @Html.DropDownList("FacultyID", null, new { @class = "form-control" });
+
+                </select>
+
+
+            </div>
+            <div class="input-group-append button">
+                <input class="btn btn-primary" type="submit" value="Tìm kiếm" name="Submit" style="border-radius :0 5px 5px 0">
+
+
+            </div>
+        </div>*@
+            @*@using (Html.BeginForm("Index", "Search", FormMethod.Get))*@
+      
+                <p>
+                    Title: @Html.TextBox("SearchString") --- Category: @Html.DropDownList("categoryID", null, new { @class = "form-control" }) <input type="submit" value="Tìm kiếm" />
+                </p>
+
+
+            </form>
+</div>
+</div>

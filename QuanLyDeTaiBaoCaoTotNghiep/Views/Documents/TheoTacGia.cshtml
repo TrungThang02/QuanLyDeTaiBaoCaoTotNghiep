@@ -1,0 +1,26 @@
+﻿
+@foreach (var d in Model)
+{
+    <div>
+        <div class="media" data-toggle-tool="tooltip" data-custom-class="tooltip-danger" data-placement="left" title="@d.GraduationReportName">
+            <i class="ti-zip icon-md text-primary d-flex align-self-start mr-1"></i>
+            <div class="media-body">
+                <a href="/Documents/XemBaoCao/@d.GraduationReportID"> @d.GraduationReportName.ToUpper()</a>
+
+
+            </div>
+
+        </div>
+    </div>
+    <hr />
+}
+
+<style>
+    a {
+        color: #333;
+    }
+    hr{
+        margin : 0;
+
+    }
+</style>

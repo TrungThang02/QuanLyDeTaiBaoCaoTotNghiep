@@ -31,7 +31,7 @@
                             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
                     <form>
                         <div class="form-group">
-                            <label class="text-left">Email</label>
+                            <label class="text-left">Tên người dùng</label>
                             @Html.TextBox("TenDN", null, new { @class = "form-control", placeholder = "username" })
                             @*<input type="text" id="TenDN" class="form-control" />*@
 
@@ -49,7 +49,8 @@
                         </div>
                         <!-- Checkbox -->
                         <div class="form-group text-right">
-                            <label class="form-label"><a href="#" style="font-style: italic; text-align:right; color :#3b5998">Quên mật khẩu ?</a></label>
+                          
+                            <label class="form-label"><a href="@Url.Action("ForgotPassword","User")" style="font-style: italic; text-align:right; color :#3b5998">Quên mật khẩu ?</a></label>
                         </div>
                         <p style="color: red">@ViewBag.Message</p>
                         <p style="color: red">@ViewBag.ThongBao</p>

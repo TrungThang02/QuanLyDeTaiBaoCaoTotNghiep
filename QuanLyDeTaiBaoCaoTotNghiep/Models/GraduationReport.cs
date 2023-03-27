@@ -17,16 +17,18 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Models
         public int GraduationReportID { get; set; }
         public string GraduationReportName { get; set; }
         public string Image { get; set; }
-        public string ReportFile { get; set; }
-        public Nullable<int> ClassID { get; set; }
-        public Nullable<int> FacultyID { get; set; }
+        public int ClassID { get; set; }
+        public int FacultyID { get; set; }
         public string Description { get; set; }
-        public Nullable<int> UserID { get; set; }
-        public string Name { get; set; }
+        public Nullable<int> ID { get; set; }
         public string Author { get; set; }
         public Nullable<int> CommentID { get; set; }
-        public Nullable<int> CategoryID { get; set; }
+        public string UrlFile { get; set; }
+        public string Keyword { get; set; }
+        public Nullable<int> YearID { get; set; }
+        public Nullable<System.DateTime> UploadDate { get; set; }
     
+        public virtual AcademicYear AcademicYear { get; set; }
         public virtual Class Class { get; set; }
         public virtual Faculty Faculty { get; set; }
     }

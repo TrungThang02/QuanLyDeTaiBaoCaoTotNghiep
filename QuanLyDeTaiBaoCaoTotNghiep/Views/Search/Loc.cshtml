@@ -1,0 +1,249 @@
+﻿
+@{
+    ViewBag.Title = "Search";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+
+<style>
+    :root {
+        --main-color1: #eb4d4b;
+        --text-color: #131e2c;
+    }
+
+    .product-grid {
+        margin-bottom: 50px;
+        border-radius: 5px;
+        font-family: 'Oswald', sans-serif;
+        text-align: center;
+        /*border: 1px solid #333;*/
+        height: 350px;
+        justify-content: center;
+        box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(5, 115, 255, 1) 0px 0px 0px 1px;
+    }
+
+        .product-grid:hover {
+            box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px;
+            /*  -webkit-transform: skewY(-0.5deg);
+            -moz-transform: skewY(-0.5deg);
+            transform: skewY(-0.5deg);
+            -webkit-backface-visibility: hidden;*/
+        }
+
+        .product-grid .product-image {
+            position: relative;
+        }
+
+            .product-grid .product-image a.image {
+                display: block;
+            }
+
+            .product-grid .product-image img {
+                width: 150px;
+                height: 250px;
+                object-fit: cover;
+            }
+
+    .product-image .pic-1 {
+        opacity: 1;
+        backface-visibility: hidden;
+        border-bottom: 1px solid #333;
+        margin-top: 10px;
+    }
+
+
+
+    .product-grid .product-sale-label,
+    .product-grid .product-discount-label {
+        color: #fff;
+        background: #da5555;
+        font-size: 12px;
+        letter-spacing: 1px;
+        line-height: 14px;
+        padding: 5px 11px;
+        border-radius: 12px;
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        transition: all 0.4s ease;
+    }
+
+    .product-grid .product-sale-label {
+        background: #2ba968;
+        text-transform: uppercase;
+        left: 10px;
+        right: auto;
+    }
+
+    .product-grid .product-content {
+        padding: 8px;
+    }
+
+    .product-grid .rating {
+        padding: 0;
+        margin: 0 0 7px;
+        list-style: none;
+    }
+
+        .product-grid .rating li {
+            color: var(--text-color);
+            font-size: 12px;
+            display: inline-block;
+        }
+
+            .product-grid .rating li.disable {
+                color: rgba(0,0,0,.20);
+            }
+
+    .product-grid .title {
+        color: var(--text-color);
+        font-size: 15px;
+        text-transform: capitalize;
+    }
+
+        .product-grid .title a {
+            color: var(--text-color);
+            transition: all 500ms;
+        }
+
+            .product-grid .title a:hover {
+                color: var(--main-color1);
+            }
+
+    .product-grid .price {
+        color: var(--text-color);
+        font-size: 18px;
+        letter-spacing: 0.005em;
+        margin-bottom: 10px;
+    }
+
+        .product-grid .price span {
+            color: #a7a7a7;
+            font-size: 14px;
+            font-weight: 400;
+            text-decoration: line-through;
+        }
+
+    .product-grid .product-button-group {
+        position: relative;
+        z-index: 1;
+    }
+
+    .product-grid .add-to-cart {
+        color: var(--text-color);
+        background: #f4f4f4;
+        font-size: 14px;
+        width: calc(100% - 75px);
+        padding: 5px 3px;
+        margin: 0 auto;
+        display: inline-block;
+        transition: all 0.25s ease 0s;
+        border-radius: 5px;
+        box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
+    }
+
+        .product-grid .add-to-cart i {
+            margin-right: 8px;
+            display: none;
+            visibility: hidden;
+            transition: all 0.25s ease 0s;
+        }
+
+    .product-grid:hover .add-to-cart {
+        color: #fff;
+        background: var(--text-color);
+    }
+
+        .product-grid:hover .add-to-cart i {
+            display: inline-block;
+            visibility: visible;
+        }
+
+    .product-grid .product-like-icon,
+    .product-grid .product-compare-icon {
+        color: var(--text-color);
+        background: #f4f4f4;
+        line-height: 34px;
+        width: 34px;
+        height: 34px;
+        opacity: 0;
+        transform: translateY(-50%);
+        position: absolute;
+        top: 50%;
+        left: 50px;
+        z-index: -1;
+        transition: all 0.25s ease 0s;
+    }
+
+    .product-grid .product-compare-icon {
+        left: auto;
+        right: 50px;
+    }
+
+    .product-grid:hover .product-like-icon {
+        opacity: 1;
+        left: 0;
+    }
+
+    .product-grid:hover .product-compare-icon {
+        opacity: 1;
+        right: 0;
+    }
+
+    @@media only screen and (max-width:990px) {
+        .product-grid {
+            margin-bottom: 30px;
+        }
+    }
+
+    .text {
+        height: 70px;
+        align-items: center;
+        text-align: center;
+        display: flex;
+        justify-content: center;
+    }
+</style>
+<hr />
+<div class="container">
+    <div class="row">
+        @foreach (var dt in Model)
+        {
+            <div class="col-md-3 col-sm-6">
+                <div class="product-grid">
+                    <div class="product-image">
+                        <a href="/Documents/XemBaoCao/@dt.GraduationReportID" class="image">
+                            <img class="pic-1" src="~/Content/images/AnhBaoCao/@dt.Image">
+
+                        </a>
+                        @*<span class="product-sale-label">hot</span>
+                            <span class="product-discount-label">-33%</span>*@
+                    </div>
+                    <div class="product-content">
+                        @*<ul class="rating">
+                                <li class="fas fa-star"></li>
+                                <li class="fas fa-star"></li>
+                                <li class="fas fa-star"></li>
+                                <li class="fas fa-star"></li>
+                                <li class="fas fa-star disable"></li>
+                            </ul>*@
+
+                        <div class="text">
+                            <a href="/Documents/XemBaoCao/@dt.GraduationReportID">@dt.GraduationReportName</a>
+                        </div>
+                        <div class="product-button-group">
+                            <a class="product-like-icon" href="#"><i class="fas fa-heart"></i></a>
+                            <a class="add-to-cart" href="#"><i class="fa-solid fa-eye"></i>XEM NGAY</a>
+                            <a class="product-compare-icon" href="#"><i class="fa-solid fa-share-from-square"></i></a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        }
+    </div>
+</div>
+
+
+
+

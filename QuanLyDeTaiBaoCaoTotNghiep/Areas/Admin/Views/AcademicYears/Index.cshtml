@@ -1,0 +1,80 @@
+﻿@using QuanLyDeTaiBaoCaoTotNghiep.Models;
+@using PagedList.Mvc;
+@model PagedList.PagedList<QuanLyDeTaiBaoCaoTotNghiep.Models.AcademicYear>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+
+<p>
+    @Html.ActionLink("Thêm mới", "Create", null, new { @class = "btn btn-success" })
+</p>
+<table class="table">
+    <tr>
+        <th>
+            Tên niên khóa
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+
+            <td>
+                @Html.ActionLink("Sửa", "Edit", new { id = item.YearID }, new { @class = "btn btn-primary" })
+                @Html.ActionLink("Chi tiết", "Details", new { id = item.YearID }, new { @class = "btn btn-info" })
+                <a data-id="@item.YearID" class="btn btn-danger delete">Xóa</a>
+            </td>
+        </tr>
+    }
+
+</table>
+
+<div class="list">
+    <div class="MenuTrang">
+        @Html.PagedListPager(Model, page => Url.Action("Index", "AcademicYears", new { page = page }))
+    </div>
+</div>
+
+<style>
+    .MenuTrang {
+        margin-top: 500px;
+        display: inline;
+        text-align: center;
+        width: 100%;
+    }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+    const btnDelete = document.querySelectorAll('.delete');
+
+    btnDelete.forEach(btn => {
+        btn.addEventListener('click', (event) => {
+            var id = btn.dataset.id;
+            event.preventDefault();
+
+            Swal.fire({
+                title: 'Bạn có chắc chắn muốn xóa ?',
+                text: "Nếu bạn xóa bạn không thể khôi phục lại!",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Yes !'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    Swal.fire(
+                        'Xóa thành công'
+                    )
+                    window.location.href = "/AcademicYear/Delete/" + id;
+                }
+            })
+        });
+    });
+</script>

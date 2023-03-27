@@ -1,0 +1,165 @@
+﻿
+    @{
+        ViewBag.Title = "XemBaoCao";
+        Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    }
+    <style>
+        .bgn {
+            background: #005180;
+            text-align: center;
+            font-weight: bold;
+            text-transform: uppercase;
+            /* background: #282f3a; */
+            color: #fff;
+            line-height: 2.5rem;
+            margin: -12px -12px 10px -12px;
+            border-radius: 10px 10px 0 0;
+        }
+
+/*        body, html, p {
+            font-family: "Montserrat", sans-serif;
+        }
+*/
+        .pdfobject-container {
+            width: 100%;
+            border: 1px #ddd solid;
+            border-right: 3px #ddd solid;
+        }
+        .float-lg-none{
+            scroll-behavior: smooth;
+            height: fit-content;
+            
+        }
+        .media-body a {
+            font-family : 'Segoe UI';
+            font-size : 15px;
+            font-weight : 500;
+            text-transform :capitalize;
+         
+        }
+        .media-body{
+            margin : 5px;
+        }
+        .header-one .logo-area {
+            padding-top: 20px;
+        }
+        .logo img{
+            width : 120px;
+            height: auto;
+        }
+    </style>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://trungthang02.github.io/test/bc.css">
+    <div class="content-wrapper">
+
+        <div class="row">
+            <div class="col-12">
+                <div class="card-body">
+                    <div>
+                  
+
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-9">
+                            <div class="display-4 text-capitalize mb-2 font-weight-bold" style="color:#333">@Model.GraduationReportName</div>
+                            <div class="row">
+                                <ul class="list-inline col-12 d-flex justify-content-between flex-wrap mb-0">
+                                    
+                                    
+                                    <li class="list-inline-item">
+                                        <i class="ti-user icon-sm text-success" style="vertical-align: -2px;"></i>
+                                        Người đăng: <a href="#" class="text-capitalize">@Model.Author</a>
+                                    </li>
+                                    <li class="list-inline-item">
+                                        <i class="ti-time icon-sm text-success" style="vertical-align: -2px;"></i>
+                                        Ngày đăng: @Model.UploadDate
+                                    </li>
+                                </ul>
+                            </div>
+
+
+                            <div class="page_padding product_list_sp">
+                                <div class="placeSlide_main">
+                                    <div class="placeSlide_with">
+
+                                        <div class="embed-responsive-item" id="myFrame">
+                                            <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfobject/2.2.8/pdfobject.min.js" integrity="sha512-MoP2OErV7Mtk4VL893VYBFq8yJHWQtqJxTyIAsCVKzILrvHyKQpAwJf9noILczN6psvXUxTr19T5h+ndywCoVw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+                                            <script type="text/javascript">
+                                            if (PDFObject.supportsPDFs) {
+                                                var path = '/File/@Model.UrlFile';
+                                                PDFObject.embed(path, '.placeSlide_with').style.height = "800px";
+
+
+
+                                            } else {
+                                                alert("Trình duyệt không hỗ trợ")
+                                            }
+                                            </script>
+
+                                        </div>
+                                        <div class="clr"></div>
+                                    </div>
+
+
+                                </div>
+                            </div>
+                            <style>
+                                .btn-danger{
+                                    border: none;
+                                    background : #fff;
+                                    color :#fff;
+                                }
+                                    .btn-danger:hover {
+                                        border: none;
+                                        background: #fff;
+                                        color: #fff;
+                                        cursor : none;
+                                    }
+                            </style>
+                            
+                            <!-- <iframe src="https://docs.google.com/gview?url=https://tailieu.hiepsiit.com/docs/Lab06.WebSachOnline(QLSach)_6327d439238e1.pdf&embedded=true" style="width:100%;min-height:600px; border: 1px #ddd solid; border-right: 3px #ddd solid"></iframe> -->
+                            <div>
+                                <h4 class="text-primary font-weight-bold text-uppercase mt-3">Mô Tả</h4>
+                                <p>
+                                    @Model.Description
+                                </p>
+                            </div>
+                        </div>
+                        <div class="col-lg-3">
+                            <button class="btn btn-danger btn-rounded mb-3 btn-icon-text btn-block text-capitalize"><i class="btn-icon-prepend ti-download"></i> Tải xuống</button>
+                            <div class="relate-doc col-lg-12 col-sm-5 float-lg-none float-sm-left">
+                                <div class="bgn">
+                                    <div class="glow"></div>BÁO CÁO MỚI NHẤT
+                                </div>
+
+
+                                @Html.Action("TheoTacGia", "Documents")
+
+                            </div>
+                            <!--<div class="relate-doc col-lg-12 col-sm-5 float-lg-none float-sm-right">
+                                <div class="bgn">
+                                    <div class="glow"></div>Tài liệu mới nhất
+                                </div>
+                                <div class="media" data-toggle-tool="tooltip" data-custom-class="tooltip-warning" data-placement="left" title="đồ án chuyên ngành">
+                                    <i class="ti-zip icon-md text-primary d-flex align-self-start mr-1"></i>
+                                    <div class="media-body">
+                                        <a href="https://tailieu.hiepsiit.com/view/bao-cao/asp-net/do-an-chuyen-nganh-1">
+                                            <p class="text-capitalize">đồ án chuyên ngành</p>-->
+                                            @*<ul>
+                                                    <li class="docview float-left"><i class="ti-eye"></i>545</li>
+                                                    <li class="docdown float-right"><i class="ti-import"></i>63</li>
+                                                </ul>*@
+                                        <!--</a>
+                                    </div>
+                                </div>
+
+                            </div>-->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+}

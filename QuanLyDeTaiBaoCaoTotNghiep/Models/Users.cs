@@ -14,7 +14,6 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Models
     
     public partial class Users
     {
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
         public int ID { get; set; }
         public string Name { get; set; }
         public Nullable<int> Age { get; set; }
@@ -26,7 +25,11 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Models
         public string Phone { get; set; }
         public Nullable<int> ClassID { get; set; }
         public Nullable<int> FacultyID { get; set; }
+        public Nullable<int> YearID { get; set; }
+        public Nullable<System.DateTime> Date { get; set; }
+        public string ResetPasswordCode { get; set; }
     
+        public virtual AcademicYear AcademicYear { get; set; }
         public virtual Class Class { get; set; }
         public virtual Faculty Faculty { get; set; }
     }
