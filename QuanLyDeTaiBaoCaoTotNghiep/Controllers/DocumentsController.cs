@@ -190,44 +190,49 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
             {
                 try
                 {
-                    if (image != null || image.ContentLength > 0 && file != null || file.ContentLength > 0)
+                    if (image != null || image.ContentLength > 0)
                     {
-                        var newFile = Guid.NewGuid();
-                        var renamefile = Path.GetExtension(file.FileName);
-                        string newName = newFile + renamefile;
-                        //lấy tên file, khai báo thư viện(System IO)
-
-                        string sFileName2 = Path.GetFileName(newName);
-
-                        var newImage = Guid.NewGuid();
-                        var renameImage = Path.GetExtension(image.FileName);
-                        string newImageName = newImage + renameImage;
-                        //lấy tên file, khai báo thư viện(System IO)
-
-                        var sFileName = Path.GetFileName(newImageName);
-
-
-
-                        //Lấy đường dẫn lưu file
-                        var path = Path.Combine(Server.MapPath("~/Content/images/AnhBaoCao"), sFileName);
-                        string path2 = Path.Combine(Server.MapPath("~/File"), sFileName2);
-                        file.SaveAs(path2);
-                        image.SaveAs(path);
-                        //Kiểm tra ảnh đã được tải lên chưa
-                        //Kiểm tra ảnh đã được tải lên chưa
-                        if (!System.IO.File.Exists(path) && !System.IO.File.Exists(path2))
+                        if(file != null || file.ContentLength > 0)
                         {
-                            System.IO.File.Delete(path);
-                            System.IO.File.Delete(path2);
+                            var newFile = Guid.NewGuid();
+                            var renamefile = Path.GetExtension(file.FileName);
+                            string newName = newFile + renamefile;
+                            //lấy tên file, khai báo thư viện(System IO)
 
-                        }
-                        else
-                        {
-                            image.SaveAs(path);
+                            string sFileName2 = Path.GetFileName(newName);
+
+                            var newImage = Guid.NewGuid();
+                            var renameImage = Path.GetExtension(image.FileName);
+                            string newImageName = newImage + renameImage;
+                            //lấy tên file, khai báo thư viện(System IO)
+
+                            var sFileName = Path.GetFileName(newImageName);
+
+
+
+                            //Lấy đường dẫn lưu file
+                            var path = Path.Combine(Server.MapPath("~/Content/images/AnhBaoCao"), sFileName);
+                            string path2 = Path.Combine(Server.MapPath("~/File"), sFileName2);
                             file.SaveAs(path2);
-                            baocao.Image = sFileName;
-                            baocao.UrlFile = sFileName2;
+                            image.SaveAs(path);
+                            //Kiểm tra ảnh đã được tải lên chưa
+                            //Kiểm tra ảnh đã được tải lên chưa
+                            if (!System.IO.File.Exists(path) && !System.IO.File.Exists(path2))
+                            {
+                                System.IO.File.Delete(path);
+                                System.IO.File.Delete(path2);
+
+                            }
+                            else
+                            {
+                                image.SaveAs(path);
+                                file.SaveAs(path2);
+                                baocao.Image = sFileName;
+                                baocao.UrlFile = sFileName2;
+                            }
+
                         }
+
 
                     }
 
