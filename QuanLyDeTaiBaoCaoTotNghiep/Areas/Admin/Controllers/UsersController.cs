@@ -16,7 +16,7 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Areas.Admin.Controllers
     {
         private QuanLyDeTaiBCTNSVEntities db = new QuanLyDeTaiBCTNSVEntities();
 
-        // GET: Admin/Users
+        // GET: Admin/Users 
         public ActionResult Index(int ? page)
         {
             int iSize = 7;
