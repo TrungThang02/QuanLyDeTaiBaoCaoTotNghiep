@@ -19,11 +19,11 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
     public class UserController : Controller
     {
 
-        static int id = 0;
+        static int idInfo = 0;
 
         public int getid()
         {
-            return id;
+            return idInfo;
         }
         QuanLyDeTaiBCTNSVEntities db = new QuanLyDeTaiBCTNSVEntities();
         // GET: User
@@ -98,7 +98,7 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
 
                         Session["TaiKhoan3"] = nguoidung.ID;
 
-                        id = nguoidung.ID;
+                        idInfo = nguoidung.ID;
 
                         if (nguoidung == ADMIN)
                         {
@@ -353,17 +353,19 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
             return View(bc);
         }
 
-
+        
         public ActionResult Thaydoithongtin(int? id)
         {
+            //
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             Users users = db.Users.Find(id);
-            if (users == null)
+            if (idInfo != id)
             {
-                return HttpNotFound();
+                return RedirectToAction("PageNotFound", "Error");
+               
             }
             ViewBag.ClassID = new SelectList(db.Class, "ClassID", "ClassName", users.ClassID);
             ViewBag.FacultyID = new SelectList(db.Faculty, "FacultyID", "FacultyName", users.FacultyID);
