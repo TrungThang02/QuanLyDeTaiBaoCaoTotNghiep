@@ -735,7 +735,6 @@
     <Content Include="Areas\Admin\Views\Faculty\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Faculty\Index.cshtml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
-    <Content Include="Scripts\Delete.js" />
     <Content Include="Scripts\Docfile.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />
     <Content Include="Scripts\jquery-3.4.1.min.js" />
@@ -777,7 +776,7 @@
     <Content Include="Views\User\QuanTriNguoiDung.cshtml" />
     <Content Include="Views\User\ForgotPassword.cshtml" />
     <Content Include="Views\User\ResetPassword.cshtml" />
-    <Content Include="Views\User\Quanlibaocao.cshtml" />
+    <Content Include="Views\User\Info.cshtml" />
     <Content Include="Views\Error\PageNotFound.cshtml" />
     <Content Include="Views\Documents\TheoTacGia.cshtml" />
     <Content Include="Views\Documents\Create.cshtml" />

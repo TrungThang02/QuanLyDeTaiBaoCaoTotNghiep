@@ -111,8 +111,17 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Areas.Admin.Controllers
         public ActionResult Delete(int id)
         {
             Users users = db.Users.Find(id);
-            db.Users.Remove(users);
-            db.SaveChanges();
+
+            try
+            {
+                db.Users.Remove(users);
+                db.SaveChanges();
+            }
+            catch (Exception ex)
+            {
+                ViewBag.err = "Không thể xóa tài khoản Admin";
+            }
+
             return RedirectToAction("Index", "Admin/Users", "Areas");
         }
 

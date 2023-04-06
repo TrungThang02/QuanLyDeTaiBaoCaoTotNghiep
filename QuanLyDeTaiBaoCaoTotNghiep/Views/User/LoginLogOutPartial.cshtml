@@ -50,35 +50,40 @@ else
 
 
 
-        <ul class="nav dropdown in rp">
+<ul class="nav dropdown in rp">
 
-            <li class="dropdown">
-                <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown"><span style="font-size : 12px; font-weight : 600; color: #333"><span class="fa fa-user"></span> Xin chào: @ten </span></a>
-                <ul class="dropdown-menu w">
-                    <li class="menu">
-                        <a href="/User/Thaydoithongtin/@id" style="font-size: 12px; font-weight: 600; text-transform: capitalize;">
-                            Sửa thông tin cá nhân
-                        </a>
-                    </li>
-                    <li class="menu">
-                        <a href="/User/Quanlibaocao/@id" style="font-size: 12px; font-weight: 600; text-transform: capitalize;">
-                            Quản lý tài liệu
-                        </a>
-                    </li>
-                    <li class="menu">
-                        <a href="@Url.Action("DangXuat","User")" style="font-size: 12px; font-weight: 600; text-transform: capitalize;">
-                            Đăng xuất
-                        </a>
-                    </li>
+    <li class="dropdown">
+        <a href="/User/Info/@id" class="nav-link @*dropdown-toggle*@" @*data-toggle="dropdown"*@><span style="font-size : 12px; font-weight : 600; color: #333"><span class="fa fa-user"></span> Xin chào: @ten </span></a>
+        @*<ul class="dropdown-menu w">
+                <li class="menu">
+                    <a href="/User/Thaydoithongtin/@id" style="font-size: 12px; font-weight: 600; text-transform: capitalize;">
+                        Sửa thông tin cá nhân
+                    </a>
+                </li>
+                <li class="menu">
+                    <a href="/User/Quanlibaocao/@id" style="font-size: 12px; font-weight: 600; text-transform: capitalize;">
+                        Quản lý tài liệu
+                    </a>
+                </li>
+                <li class="menu">
+                    <a href="@Url.Action("DangXuat","User")" style="font-size: 12px; font-weight: 600; text-transform: capitalize;">
+                        Đăng xuất
+                    </a>
+                </li>
 
-                </ul>
-       
-            </li>
-        </ul>
+            </ul>*@
+
+    </li>
+    <li> <a href="/User/DangXuat" class="nav-link @*dropdown-toggle*@" @*data-toggle="dropdown"*@><span style="font-size : 12px; font-weight : 600; color: #333"><span class="fa-solid fa-power-off"></span></span></a></li>
+   
+
+</ul>
 
         }
         <style>
-
+            .nav-link {
+                padding: 0.5rem 0.5rem ;
+            }
             .navcustom {
                 width: 150px;
                 padding: 0;
@@ -107,6 +112,11 @@ else
                     flex-wrap: wrap;
                     align-items: center;
                     float: unset;
+                }
+                .bg {
+                    overflow-wrap :break-word;
+                  
+                  
                 }
             }
         </style>

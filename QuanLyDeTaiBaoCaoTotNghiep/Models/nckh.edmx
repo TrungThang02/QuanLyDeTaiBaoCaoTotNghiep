@@ -75,7 +75,9 @@
           <Property Name="ResetPasswordCode" Type="varchar(max)" />
         </EntityType>
         <Association Name="FK_Class_Faculty1">
-          <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
+          <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Class" Type="Self.Class" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Faculty">
@@ -87,7 +89,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_GraduationReport_AcademicYear">
-          <End Role="AcademicYear" Type="Self.AcademicYear" Multiplicity="0..1" />
+          <End Role="AcademicYear" Type="Self.AcademicYear" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="GraduationReport" Type="Self.GraduationReport" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AcademicYear">
@@ -99,7 +103,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_GraduationReport_Class">
-          <End Role="Class" Type="Self.Class" Multiplicity="1" />
+          <End Role="Class" Type="Self.Class" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="GraduationReport" Type="Self.GraduationReport" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Class">
@@ -110,20 +116,10 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK_GraduationReport_Faculty">
-          <End Role="Faculty" Type="Self.Faculty" Multiplicity="1" />
-          <End Role="GraduationReport" Type="Self.GraduationReport" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Faculty">
-              <PropertyRef Name="FacultyID" />
-            </Principal>
-            <Dependent Role="GraduationReport">
-              <PropertyRef Name="FacultyID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
         <Association Name="FK_Users_AcademicYear">
-          <End Role="AcademicYear" Type="Self.AcademicYear" Multiplicity="0..1" />
+          <End Role="AcademicYear" Type="Self.AcademicYear" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Users" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="AcademicYear">
@@ -135,7 +131,9 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK_Users_Class">
-          <End Role="Class" Type="Self.Class" Multiplicity="0..1" />
+          <End Role="Class" Type="Self.Class" Multiplicity="0..1">
+            <OnDelete Action="Cascade" />
+          </End>
           <End Role="Users" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Class">
@@ -143,18 +141,6 @@
             </Principal>
             <Dependent Role="Users">
               <PropertyRef Name="ClassID" />
-            </Dependent>
-          </ReferentialConstraint>
-        </Association>
-        <Association Name="FK_Users_Faculty">
-          <End Role="Faculty" Type="Self.Faculty" Multiplicity="0..1" />
-          <End Role="Users" Type="Self.Users" Multiplicity="*" />
-          <ReferentialConstraint>
-            <Principal Role="Faculty">
-              <PropertyRef Name="FacultyID" />
-            </Principal>
-            <Dependent Role="Users">
-              <PropertyRef Name="FacultyID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -211,20 +197,12 @@
             <End Role="Class" EntitySet="Class" />
             <End Role="GraduationReport" EntitySet="GraduationReport" />
           </AssociationSet>
-          <AssociationSet Name="FK_GraduationReport_Faculty" Association="Self.FK_GraduationReport_Faculty">
-            <End Role="Faculty" EntitySet="Faculty" />
-            <End Role="GraduationReport" EntitySet="GraduationReport" />
-          </AssociationSet>
           <AssociationSet Name="FK_Users_AcademicYear" Association="Self.FK_Users_AcademicYear">
             <End Role="AcademicYear" EntitySet="AcademicYear" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
           <AssociationSet Name="FK_Users_Class" Association="Self.FK_Users_Class">
             <End Role="Class" EntitySet="Class" />
-            <End Role="Users" EntitySet="Users" />
-          </AssociationSet>
-          <AssociationSet Name="FK_Users_Faculty" Association="Self.FK_Users_Faculty">
-            <End Role="Faculty" EntitySet="Faculty" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
         </EntityContainer>

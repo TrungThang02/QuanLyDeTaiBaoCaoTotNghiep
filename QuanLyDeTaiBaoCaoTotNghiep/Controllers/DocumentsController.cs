@@ -14,7 +14,7 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
     public class DocumentsController : Controller
     {
 
-        UserController User = new UserController();
+        UserController Users = new UserController();
 
 
         
@@ -272,7 +272,7 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
 
         // POST: Admin/GraduationReporjfgkjhjdkts/Delete/5
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int ? id)
         {
             GraduationReport graduationReport = db.GraduationReport.Find(id);
             db.GraduationReport.Remove(graduationReport);

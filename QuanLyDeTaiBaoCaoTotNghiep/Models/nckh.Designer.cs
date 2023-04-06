@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'E:\NghienCuuKhoaHoc\QuanLyDeTaiBaoCaoTotNghiep_test\QuanLyDeTaiBaoCaoTotNghiep\Models\nckh.edmx'. 
+﻿// T4 code generation is enabled for model 'E:\NghienCuuKhoaHoc\NGHIÊN CỨU KHOA HỌC\QuanLyDeTaiBaoCaoTotNghiep\QuanLyDeTaiBaoCaoTotNghiep\Models\nckh.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

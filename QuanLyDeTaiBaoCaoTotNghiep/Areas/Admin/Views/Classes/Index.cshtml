@@ -49,7 +49,7 @@
         @Html.PagedListPager(Model, page => Url.Action("Index", "Classes", new { page = page }))
     </div>
 </div>
-<script src="~/Scripts/Delete.js"></script>
+
 <style>
     .MenuTrang {
         margin-top: 500px;
@@ -81,7 +81,7 @@
                     Swal.fire(
                         'Xóa thành công'
                     )
-                    window.location.href = "Classes/Delete/" + id;
+                   window.location.href = "/Classes/Delete/" + id;
                 }
             })
         });

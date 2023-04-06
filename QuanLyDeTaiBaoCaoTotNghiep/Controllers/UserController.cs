@@ -21,7 +21,7 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
 
         static int idInfo = 0;
 
-        public int getid()
+       static public int getid()
         {
             return idInfo;
         }
@@ -347,8 +347,14 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
         }
 
 
-        public ActionResult Quanlibaocao(int ? id)
+        public ActionResult Info(int ? id)
         {
+            if (idInfo != id)
+            {
+                return RedirectToAction("PageNotFound", "Error");
+
+            }
+
             var bc = from s in db.GraduationReport where s.ID == id select s;
             return View(bc);
         }
