@@ -43,10 +43,7 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
             //    return RedirectToAction("PageNotFound", "Error");
             //}
             //    //var dt = db.GraduationReport.FirstOrDefault(p => p.GraduationReportID == id);
-           
 
-          
-           
         }
         public ActionResult TheoTacGia()
         {
@@ -260,9 +257,6 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
                     ViewBag.Thongbao = "Chưa chọn file";
                 }
 
-
-
-
             }
             return View();
         }
@@ -280,6 +274,6 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
             return RedirectToAction("Index");
         }
 
-
+       
     }
 }

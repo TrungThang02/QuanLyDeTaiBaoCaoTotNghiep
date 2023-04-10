@@ -40,6 +40,7 @@
             -webkit-font-smoothing: antialiased !important;
             line-height: 26px;
             font-size: 15px;
+          
         }
 
         h1,
@@ -312,6 +313,10 @@
             display: flex;
             justify-content: center;
         }
+        a:link, a:visited {
+            font-family: "Montserrat", sans-serif;
+            font-weight : 500;
+        }
     </style>
 </head>
 <body>
@@ -549,12 +554,7 @@
                             </div>*@    
                             <div class="container">
 
-                                <div class="search-form" style="
-                                                padding :50px;
-                                                background : #fff3;
-                                                border-radius : 20px;
-
-                                    ">
+                                <div class="search-form" style=" padding: 60px; background: #fff5; border-radius: 15px; box-shadow: rgba(50, 50, 93, 0.25) 0px 6px 12px -2px, rgba(0, 0, 0, 0.3) 0px 3px 7px -3px; ">
  
                                     @Html.Action("K", "Home")
                                 </div>

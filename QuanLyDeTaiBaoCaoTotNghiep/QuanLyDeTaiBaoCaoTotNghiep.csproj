@@ -787,6 +787,7 @@
     <Content Include="Views\Home\K.cshtml" />
     <Content Include="Views\Documents\Edit.cshtml" />
     <Content Include="Views\User\Thaydoithongtin.cshtml" />
+    <Content Include="Views\Home\Khongcodulieu.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

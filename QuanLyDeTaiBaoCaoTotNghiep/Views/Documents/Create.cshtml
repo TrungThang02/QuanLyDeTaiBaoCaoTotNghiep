@@ -9,6 +9,7 @@
 }
     <style>
         .file {
+            flex-wrap: wrap;
             display: flex;
             margin: 10px;
             justify-content: space-around;
@@ -29,7 +30,7 @@
 
 
 
-    <div class="container" style="margin-top : 50px;width :1000px">
+    <div class="container" style="margin-top : 50px;width :fit-content">
 
         @*Thêm thuộc tính cho form để upload ảnh*@
         @using (Html.BeginForm("Create", "Documents", FormMethod.Post, new

@@ -89,6 +89,7 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
             //var tk = from d in db.GraduationReport select d;
             List<GraduationReport> products = db.GraduationReport.Where(p => p.Keyword.Contains(search)).ToList();
             ViewBag.search = search;
+           
             return View(products);
         }
         public ActionResult SearchCategory(string searchString, int categoryID = 0, int year = 0)
@@ -98,19 +99,17 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
             //2.Tạo câu truy vấn kết 3 bảng Book, Author, Category
             //var dt = db.GraduationReport.Include(b => b.Faculty).Include(b => b.Class);
             var tk = from d in db.GraduationReport select d;
-            //3. Tìm kiếm theo searchString
+            //3. Tìm kiếm theo searchStrin
             if (!String.IsNullOrEmpty(searchString))
                 tk = tk.Where(b => b.Keyword.Contains(searchString));
+  
 
             //4. Tìm kiếm theo CategoryID
             if (categoryID != 0)
             {
                 tk = tk.Where(c => c.FacultyID == categoryID);
             }
-            //4. Tìm kiếm theo CategoryID
-            // if (year != 0)
-            //{
-            //    tk = tk.Where(c => c.YearID == year);
+           
             //}
                 //5. Tạo danh sách danh mục để hiển thị ở giao diện View thông qua DropDownList
                 ViewBag.CategoryID = new SelectList(db.Faculty, "FacultyID", "FacultyName");
@@ -129,6 +128,11 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
         {
             var d = from t in db.GraduationReport select t;
             return PartialView(d.ToList().Take(4));
+        }
+
+        public ActionResult Khongcodulieu()
+        {
+            return View();
         }
     }
 }
