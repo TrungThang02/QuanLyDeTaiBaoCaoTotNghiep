@@ -189,9 +189,9 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
             {
                 try
                 {
-                    if (image != null || image.ContentLength > 0)
+                    if (image != null && image.ContentLength > 0)
                     {
-                        if(file != null || file.ContentLength > 0)
+                        if(file != null && file.ContentLength > 0)
                         {
                             var newFile = Guid.NewGuid();
                             var renamefile = Path.GetExtension(file.FileName);
@@ -233,6 +233,10 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
                         }
 
 
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Please select a file to upload";
                     }
 
                     baocao.GraduationReportName = f["sTenSach"];

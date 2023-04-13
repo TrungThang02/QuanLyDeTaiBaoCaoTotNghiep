@@ -21,7 +21,7 @@
 </style>
 
 
-    <div class="container" style="margin-top : 50px;width :1000px">
+    <div class="container" style="margin-top : 50px;width :fit-content">
         <h4 align="center">Chỉnh sửa báo cáo</h4>
         @ViewBag.Thongbao
         @*Thêm thuộc tính cho form để upload ảnh*@
@@ -67,9 +67,9 @@
 
                     <div class="col-md-5">
                         <label class="control-label">Ảnh bìa:</label>
-                        <input type="file" name="image" class="form-control" />
+                        <input type="file" name="image" class="form-control" value="@Model.Image"/>
                         @*Thông báo lỗi yêu cầu phải chọn ảnh bìa*@
-                        @ViewBag.ThongBao
+                        @ViewBag.Message
                         <img src="~/Content/images/AnhBaoCao/@Model.Image" alt="Alternate Text" width="50px" value="@Model.Image" />
                     </div>
 
@@ -79,7 +79,7 @@
                         <label class="control-label">File tài liệu:</label>
                         <input type="file" name="file" class="form-control" value="@Model.UrlFile" />
                         @*Thông báo lỗi yêu cầu phải chọn ảnh bìa*@
-                        @ViewBag.ThongBao
+                        @ViewBag.Message
                         <p>LƯU Ý : Chỉ được up file < 20.MB !</p>
                     </div>
 
