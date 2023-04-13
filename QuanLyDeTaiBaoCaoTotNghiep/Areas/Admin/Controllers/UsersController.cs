@@ -111,7 +111,6 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Areas.Admin.Controllers
         public ActionResult Delete(int id)
         {
             Users users = db.Users.Find(id);
-
             try
             {
                 db.Users.Remove(users);

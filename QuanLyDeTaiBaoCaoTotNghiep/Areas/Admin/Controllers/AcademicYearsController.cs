@@ -94,7 +94,7 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Areas.Admin.Controllers
 
         // GET: Admin/AcademicYears/Delete/5
 
-        public ActionResult Delete(int id)
+        public ActionResult Delete(int ? id)
         {
             AcademicYear academicYear = db.AcademicYear.Find(id);
             db.AcademicYear.Remove(academicYear);

@@ -66,13 +66,14 @@
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes !'
+                cancelButtonText: 'Hủy',
+                confirmButtonText: 'Xóa'
             }).then((result) => {
                 if (result.isConfirmed) {
                     Swal.fire(
                         'Xóa thành công'
                     )
-                    window.location.href = "/AcademicYear/Delete/" + id;
+                    window.location.href = "/AcademicYears/Delete/" + id;
                 }
             })
         });

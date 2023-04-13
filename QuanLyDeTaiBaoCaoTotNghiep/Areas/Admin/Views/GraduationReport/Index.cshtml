@@ -95,7 +95,7 @@
         {
             <tr>
                 <td>
-                    @Truncate(item.GraduationReportName.ToUpper(), 50)
+                    @Truncate(item.GraduationReportName.ToUpper(), 30)
 
                 </td>
                 <td>
@@ -110,9 +110,10 @@
                 @*<td>
                         @Html.DisplayFor(modelItem => item.UserID)
                     </td>*@
-                <td>
-                    @Html.DisplayFor(modelItem => item.Author)
-                </td>
+            <td>
+                @Truncate(item.Author.ToUpper(),20)
+              
+            </td>
                 @*<td>
                         @Html.DisplayFor(modelItem => item.CommentID)
                     </td>*@
@@ -187,7 +188,8 @@
                 showCancelButton: true,
                 confirmButtonColor: '#3085d6',
                 cancelButtonColor: '#d33',
-                confirmButtonText: 'Yes !'
+                cancelButtonText: 'Hủy',
+                confirmButtonText: 'Xóa'
             }).then((result) => {
                 if (result.isConfirmed) {
                     Swal.fire(
