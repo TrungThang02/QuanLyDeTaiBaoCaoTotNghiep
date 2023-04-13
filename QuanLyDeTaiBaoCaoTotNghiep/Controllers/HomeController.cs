@@ -89,7 +89,8 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
             //var tk = from d in db.GraduationReport select d;
             List<GraduationReport> products = db.GraduationReport.Where(p => p.Keyword.Contains(search)).ToList();
             ViewBag.search = search;
-           
+            var sl = products.Count();
+            ViewBag.sl = sl;
             return View(products);
         }
         public ActionResult SearchCategory(string searchString, int categoryID = 0, int year = 0)
@@ -112,8 +113,10 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
            
             //}
                 //5. Tạo danh sách danh mục để hiển thị ở giao diện View thông qua DropDownList
-                ViewBag.CategoryID = new SelectList(db.Faculty, "FacultyID", "FacultyName");
-            ViewBag.YearID = new SelectList(db.AcademicYear, "YearID", "Name");// danh sách Category               
+            ViewBag.CategoryID = new SelectList(db.Faculty, "FacultyID", "FacultyName");
+            ViewBag.YearID = new SelectList(db.AcademicYear, "YearID", "Name");// danh sách Category
+            var sl = tk.Count();
+            ViewBag.sl = sl;
             return View(tk.ToList());
         }
 

@@ -26,6 +26,8 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
             int iPageNum = (page ?? 1);
 
             var d = (from t in db.GraduationReport select t).OrderByDescending(t => t.UploadDate);
+
+          
             return View(d.OrderBy(s=> s.GraduationReportID).ToPagedList(iPageNum, iSize));
         }
         [HandleError]

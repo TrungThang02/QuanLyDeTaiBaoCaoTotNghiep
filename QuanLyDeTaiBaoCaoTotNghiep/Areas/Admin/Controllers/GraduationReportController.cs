@@ -28,6 +28,8 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Areas.Admin.Controllers
             int iSize = 3;
             int iPageNum = (page ?? 1);
             var graduationReport = db.GraduationReport.Include(g => g.Class).Include(g => g.Faculty).ToList();
+
+         
                 return View(graduationReport.OrderBy(x => x.GraduationReportID).ToPagedList(iPageNum, iSize));
 
 
