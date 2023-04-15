@@ -31,21 +31,45 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
             return View(d.OrderBy(s=> s.GraduationReportID).ToPagedList(iPageNum, iSize));
         }
         [HandleError]
+
+
+        public ActionResult CheckTypeFile(int? id)
+        {
+            string myString = db.GraduationReport.FirstOrDefault(f => f.GraduationReportID == id)?.UrlFile;
+            if (myString.Contains("pdf"))
+            {
+                return Redirect("/Documents/XemBaoCao/" + id);
+            }
+            else if (myString.Contains("docx"))
+            {
+                return Redirect("/Documents/View/" + id);
+               
+            }
+            else
+            {
+                return View();
+            }
+        }
+
         public ActionResult XemBaoCao(int ? id)
         {
             //if (ModelState.IsValid)
             //{
-          
-                var dt = from s in db.GraduationReport where s.GraduationReportID == id select s;
-                return View(dt.Single());
-              
-            //}
-            //else
-            //{
-            //    return RedirectToAction("PageNotFound", "Error");
-            //}
-            //    //var dt = db.GraduationReport.FirstOrDefault(p => p.GraduationReportID == id);
 
+
+            var dt = from s in db.GraduationReport where s.GraduationReportID == id select s;
+            return View(dt.Single());
+
+
+    
+            
+
+        }
+
+        public ActionResult View(int ?id)
+        {
+            var dt = from s in db.GraduationReport where s.GraduationReportID == id select s;
+            return View(dt.Single());
         }
         public ActionResult TheoTacGia()
         {
