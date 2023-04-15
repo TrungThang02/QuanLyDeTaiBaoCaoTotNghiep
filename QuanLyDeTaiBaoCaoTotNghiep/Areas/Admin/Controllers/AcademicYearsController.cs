@@ -99,7 +99,7 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Areas.Admin.Controllers
             AcademicYear academicYear = db.AcademicYear.Find(id);
             db.AcademicYear.Remove(academicYear);
             db.SaveChanges();
-            return RedirectToAction("Index", "Admin/AcademicYear", "Areas");
+            return RedirectToAction("Index", "Admin/AcademicYears", "Areas");
         }
 
         protected override void Dispose(bool disposing)

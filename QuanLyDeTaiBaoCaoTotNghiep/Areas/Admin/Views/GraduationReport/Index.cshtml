@@ -67,9 +67,9 @@
             @*<th>
                     @Html.DisplayNameFor(model => model.UserID)
                 </th>*@
-            <th>
+            @*<th>
                 Tác giả
-            </th>
+            </th>*@
             @*<th>
                     @Html.DisplayNameFor(model => model.CommentID)
                 </th>*@
@@ -95,7 +95,7 @@
         {
             <tr>
                 <td>
-                    @Truncate(item.GraduationReportName.ToUpper(), 30)
+                    @Truncate(item.GraduationReportName.ToUpper(), 20)
 
                 </td>
                 <td>
@@ -110,10 +110,10 @@
                 @*<td>
                         @Html.DisplayFor(modelItem => item.UserID)
                     </td>*@
-            <td>
-                @Truncate(item.Author.ToUpper(),20)
-              
-            </td>
+            @*<td>
+
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>*@
                 @*<td>
                         @Html.DisplayFor(modelItem => item.CommentID)
                     </td>*@
@@ -168,8 +168,6 @@
         width: 100%;
     }
 </style>
-
-
 
 
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

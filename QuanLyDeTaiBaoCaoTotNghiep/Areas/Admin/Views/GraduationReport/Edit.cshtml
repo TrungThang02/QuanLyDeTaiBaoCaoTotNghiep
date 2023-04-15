@@ -225,11 +225,15 @@
                    required />
         </div>
     </div>
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-12">
-            <center>
-                <input type="submit" value="Lưu" class="btn btn-success" />
-            </center>
+    <div class="d-flex mt-2" style="display: flex; justify-content:center; align-content:center">
+        <div style="display: flex">
+
+            <div class="col-md-offset-2 m-2">
+                <input type="submit" value="Lưu" class="btn btn-primary" />
+            </div>
+            <div class="m-2">
+                @Html.ActionLink("Trở về", "Index", null, new { @class = "btn btn-dark" })
+            </div>
         </div>
     </div>
 

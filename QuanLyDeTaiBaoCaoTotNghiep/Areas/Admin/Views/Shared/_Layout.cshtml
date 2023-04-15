@@ -42,9 +42,10 @@
     <!-- Helpers -->
     <script src="~/Areas/Admin/assets/vendor/js/helpers.js"></script>
     <style>
-        .table > :not(caption) > * > *{
-            padding : 5px;
+        .table > :not(caption) > * > * {
+            padding: 5px;
         }
+
         .pagination {
             justify-content: center;
         }
@@ -54,6 +55,22 @@
                 border-radius: 50%;
             }
 
+        a:not([href]) {
+            color: #fff;
+        }
+    </style>
+
+    <style>
+        .file {
+            flex-wrap: wrap;
+            display: flex;
+            margin: 10px;
+            justify-content: space-around;
+        }
+
+        .form-control {
+            border-radius: 8px;
+        }
     </style>
 
     <!--! Template customizer & Theme config files MUST be included after core stylesheets and helpers.js in the <head> section -->
@@ -264,28 +281,6 @@
 
     <!-- Place this tag in your head or just before your close body tag. -->
     <script async defer src="https://buttons.github.io/buttons.js"></script>
-    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
-    <script>
-        function JSalert() {
-            swal({
-                title: "Bạn chắc chứ ?",
-                text: "Nếu bạn xác nhận bạn không thể khôi phục lại dữ liệu",
-                icon: "warning",
-                buttons: true,
-                dangerMode: true,
-                timer: 30000,
-            })
-                .then((willDelete) => {
-                    if (willDelete) {
-                        swal("Đã xóa thành công !", {
-                            icon: "success",
-                        });
-                    } else {
-                        swal("Đã hủy !");
-                    }
-                });
-        }
-    </script>
-
+   
 </body>
 </html>
