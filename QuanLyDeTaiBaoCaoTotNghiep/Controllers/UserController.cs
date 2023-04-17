@@ -57,6 +57,7 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
         {
             var response = Request["g-recaptcha-response"];
             string secretKey = "6Let3L0jAAAAAPx3bZRlTYo3gt-0rfbbrmCFIsvk";
+            //string secretKey = "6LdPxmAlAAAAAI5URX6z8aUgEKjPUTK5AFn13uuA";
             var client = new WebClient();
 
             var result = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secretKey, response));
@@ -138,6 +139,7 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
         {
             var response = Request["g-recaptcha-response"];
             string secretKey = "6Let3L0jAAAAAPx3bZRlTYo3gt-0rfbbrmCFIsvk";
+            //string secretKey = "6LdPxmAlAAAAAI5URX6z8aUgEKjPUTK5AFn13uuA";
             var client = new WebClient();
 
             var result = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secretKey, response));
@@ -356,7 +358,7 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
             }
 
             var bc = from s in db.GraduationReport where s.ID == id select s;
-            return View(bc);
+            return View(bc.ToList());
         }
 
         

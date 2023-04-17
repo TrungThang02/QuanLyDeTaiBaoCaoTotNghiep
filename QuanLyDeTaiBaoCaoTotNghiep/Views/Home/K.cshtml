@@ -1,20 +1,41 @@
 ﻿
-@using (Html.BeginForm("SearchCategory", "Home", FormMethod.Get, new { @class = "form" }))
+
+<style>
+    .file {
+        flex-wrap: wrap;
+        display: flex;
+
+      
+        justify-content: space-around;
+      
+    }
+
+    .fit{
+        width : 330px;
+        border : none;
+        height : 45px;
+
+    }
+    .btn-info {
+        border-radius: 10px;
+        background: #007bff;
+        color: #fff;
+    }
+</style>
+@using (Html.BeginForm("SearchCategory", "Home", FormMethod.Get, new { @class = "" }))
 {
-    <div class="input-group">
-        <input type="text" class="form-control searchInput" value="@ViewBag.tukhoa" name="searchString" placeholder="NHẬP TÊN BÁO CÁO CẦN TÌM..." style="border-radius : 5px 0 0 5px ; background :#fff;">
-        <div class="input-group-append options">
-
-          
-
-            @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "btn btn-info dropdown-toggle text-uppercase" })
-
-          
+    <div class="input-group file">
+        <div class="fit">
+            <input type="text" class="form-control searchInput fit" value="@ViewBag.tukhoa" name="searchString" placeholder="NHẬP TÊN BÁO CÁO CẦN TÌM..." style=" background :#fff; text-align: center">
         </div>
-        <div class="input-group-append button">
-            <input class="btn btn-secondary" type="submit" value="TÌM BÁO CÁO" style="border-radius :0 5px 5px 0">
+       
+        <div class="input-group-append options fit">
 
+            @Html.DropDownList("CategoryID", null, htmlAttributes: new { @class = "btn btn-info dropdown-toggle text-uppercase fit" })
 
+        </div>
+        <div class="input-group-append fit">
+            <input class="btn btn-secondary fit" type="submit" value="TÌM BÁO CÁO" >
         </div>
     </div>
 

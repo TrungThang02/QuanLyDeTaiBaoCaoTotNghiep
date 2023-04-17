@@ -277,7 +277,6 @@
     <Content Include="Content\css\NoiDung.css" />
     <Content Include="Content\css\style.css" />
     <Content Include="Content\Data\Files\HtmlPage1.html" />
-    <Content Include="Content\images\AnhBaoCao\bc1.png" />
     <Content Include="Content\images\banner\banner.jpg" />
     <Content Include="Content\images\banner\banner1.jpg" />
     <Content Include="Content\images\banner\banner2.jpg" />
@@ -416,7 +415,6 @@
     <Content Include="Content\plugins\slick\fonts\slick.ttf" />
     <Content Include="Content\plugins\slick\fonts\slick.woff" />
     <Content Include="Content\plugins\slick\README.markdown" />
-    <Content Include="Content\File\bc1.pdf" />
     <Content Include="Areas\Admin\Views\web.config" />
     <Content Include="Areas\Admin\Views\Shared\_Layout.cshtml" />
     <Content Include="Areas\composer.json" />
@@ -516,6 +514,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\File\" />
+    <Folder Include="Content\images\AnhBaoCao\" />
     <Folder Include="File\" />
   </ItemGroup>
   <ItemGroup>

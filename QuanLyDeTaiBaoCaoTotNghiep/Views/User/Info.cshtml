@@ -1,4 +1,4 @@
-﻿@model IEnumerable<QuanLyDeTaiBaoCaoTotNghiep.Models.GraduationReport>
+﻿
 @{
     ViewBag.Title = "Quanlibaocao";
     Layout = "~/Views/Shared/_LayoutUser.cshtml";
@@ -14,6 +14,8 @@
         <title>Index</title>
 
         <style>
+   
+
             .img {
                 border-radius: 10px;
                 height: 110px;
@@ -60,20 +62,10 @@
             }
         </style>
     </head>
-    @helper  Truncate(string s, int length)
-    {
-        if (s.Length < length)
-        {
-            @s
-        }
-        else
-        {
-            @s.Substring(0, length)<text>...</text>
-        }
-    }
+
     <body>
         <div class="container" style="width : fit-content">
-            <div style="margin : 20px 0 20px 0; display:flex; justify-content : center" class="bg">
+            <div style="margin : 20px 0 20px 0; display:flex; justify-content : center" class="bg file">
                 <div class="info">
                     <div class="d-block">
                         <div class="items"><a href="/User/Thaydoithongtin/@id">Cập nhật thông tin</a></div>
@@ -88,15 +80,13 @@
                                 Tên báo cáo
                             </th>
 
-                            <th>
-                                Lớp
-                            </th>
                             @*<th>
-                            @Html.DisplayNameFor(model => model.Faculty.FacultyName)
-                        </th>*@
-                            <th>
+                                Lớp
+                            </th>*@
+                 
+                            @*<th>
                                 Niên khóa
-                            </th>
+                            </th>*@
                             <th></th>
                         </tr>
 
@@ -104,22 +94,21 @@
                         {
                             <tr>
                                 <td>
-                                    @Truncate(item.GraduationReportName, 50)
+                                    <p>@item.GraduationReportName</p>
 
                                 </td>
                                 
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.Class.ClassName)
-                                </td>
                                 @*<td>
-                                @Html.DisplayFor(modelItem => item.Faculty.FacultyName)
-                            </td>*@
-                                <td>
-                                    @Html.DisplayFor(modelItem => item.AcademicYear.Name)
-                                </td>
+                                    <p>@item.Class.ClassName</p>
+                                 
+                                </td>*@
+                        
+                                @*<td>
+                                    <p>@item.AcademicYear.Name</p>
+                                </td>*@
                                 <td>
                                     <a href="/Documents/Edit/@item.GraduationReportID" class="btn btn-success">Sửa</a>
-                                    @*<a href="/Documents/Details/@item.GraduationReportID" class="btn btn-info">Chi tiết</a>*@
+
                                     <a data-id="@item.GraduationReportID" class="btn btn-danger delete">Xóa</a>
 
 
