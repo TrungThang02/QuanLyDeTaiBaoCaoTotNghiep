@@ -26,82 +26,82 @@
                             @*<h4 class="text-uppercase text-center">ĐĂNG KÝ TÀI KHOẢN</h4>*@
                             @using (Html.BeginForm())
                             {
-                        <form>
-                            <div class="form-group file">
-                                <div class="col-md-6">
-                                    <label class="form-label" for="form3Example1cg">Họ và tên</label>
-                                    @Html.TextBox("Ten", null, new { @class = "form-control form-control-lg", placeholder = "Họ và tên của bạn" })
-                                    <div>@ViewData["err2"]</div>
+                            <form>
+                                <div class="form-group file">
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="form3Example1cg">Họ và tên</label>
+                                        @Html.TextBox("Ten", null, new { @class = "form-control form-control-lg", placeholder = "Họ và tên của bạn" })
+                                        <div>@ViewData["err2"]</div>
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="form3Example1cg">Tên đăng nhập</label>
+                                        @Html.TextBox("TenDN", null, new { @class = "form-control form-control-lg", placeholder = "Tên đăng nhập" })
+                                        <div>@ViewData["err2"]</div>
+
+                                    </div>
                                 </div>
-                                <div class="col-md-6">
-                                    <label class="form-label" for="form3Example1cg">Tên đăng nhập</label>
-                                    @Html.TextBox("TenDN", null, new { @class = "form-control form-control-lg", placeholder = "Tên đăng nhập" })
-                                    <div>@ViewData["err2"]</div>
-
-                                </div>
-                            </div>
-                            <div class="form-group file">
+                                <div class="form-group file">
 
 
-                                <div class="col-md-6">
-                                    <label class="form-label" for="form3Example4cg">Mật khẩu</label>
-                                    @Html.Password("MatKhau", null, new { @class = "form-control form-control-lg", placeholder = "Mật khẩu" })
-                                    <div>@ViewData["err3"]</div>
-                                </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="form3Example4cg">Mật khẩu</label>
+                                        @Html.Password("MatKhau", null, new { @class = "form-control form-control-lg", placeholder = "Mật khẩu" })
+                                        <div>@ViewData["err3"]</div>
+                                    </div>
 
 
 
-                                <div class="col-md-6">
-                                    <label class="form-label" for="form3Example4cdg">Nhập lại mật khẩu</label>
-                                    @Html.Password("MatKhauNL", null, new { @class = "form-control form-control-lg", placeholder = "Nhập lại mật khẩu" })
-                                    <div>@ViewData["err4"]</div>
-                                </div>
-
-                            </div>
-
-
-                            <div class="form-group file">
-
-
-                                <div class="col-md-6 mb-2">
-                                    <label class="form-label" for="form3Example3cg">Email</label>
-                                    @Html.TextBox("Email", null, new { @class = "form-control form-control-lg", placeholder = "Email" })
-                                    <div> @ViewData["err5"]</div>
-
-                                </div>
-                                <div class="col-md-6">
-
-                                    <div class="g-recaptcha" data-sitekey="6Let3L0jAAAAABFwkY8edILuo3fX0U5gGzEoCeph"></div>
-
-                                    @*<div class="g-recaptcha" data-sitekey="6LdPxmAlAAAAAI5URX6z8aUgEKjPUTK5AFn13uuA"></div>*@
-                                    <div> @ViewData["err5"]</div>
-
-
-                                </div>
-
-
-                                </div>
-                            <div class="form-group file" style="margin-top: 20px">
-
-
-                                <div class="col-md-3">
-                                    <button type="submit"
-                                            class="btn btn-primary btn-block btn-lg form-control-lg form-control">
-                                        ĐĂNG KÝ
-                                    </button>
+                                    <div class="col-md-6">
+                                        <label class="form-label" for="form3Example4cdg">Nhập lại mật khẩu</label>
+                                        @Html.Password("MatKhauNL", null, new { @class = "form-control form-control-lg", placeholder = "Nhập lại mật khẩu" })
+                                        <div>@ViewData["err4"]</div>
                                     </div>
 
                                 </div>
 
-                              
 
+                                <div class="form-group file">
+
+
+                                    <div class="col-md-6 mb-2">
+                                        <label class="form-label" for="form3Example3cg">Email</label>
+                                        @Html.TextBox("Email", null, new { @class = "form-control form-control-lg", placeholder = "Email" })
+                                        <div> @ViewData["err5"]</div>
+
+                                    </div>
+                                    <div class="col-md-6">
+
+                                        <div class="g-recaptcha" data-sitekey="6Let3L0jAAAAABFwkY8edILuo3fX0U5gGzEoCeph"></div>
+
+                                        @*<div class="g-recaptcha" data-sitekey="6LdPxmAlAAAAAI5URX6z8aUgEKjPUTK5AFn13uuA"></div>*@
+                                        <div> @ViewData["err5"]</div>
+
+
+                                    </div>
+
+
+                                </div>
+                                <div class="form-group file" style="margin-top: 20px">
+
+
+                                    <div class="col-md-3">
+                                        <button type="submit"
+                                                class="btn btn-primary btn-block btn-lg form-control-lg form-control">
+                                            ĐĂNG KÝ
+                                        </button>
+                                    </div>
+
+                                </div>
+
+
+                                <p style="text-align: center; color : red; font-weight : bold">@ViewBag.ThongBao</p> 
 
                                 <p class="text-center text-muted mt-3 mb-0">
                                     Đã có tài khoản ? <a href="/User/Login"
                                                          class="fw-bold text-body"><u>Đăng nhập</u></a>
                                 </p>
 
-                        </form>
+                            </form>
                             }
                             </div>
                          

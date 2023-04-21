@@ -7,6 +7,9 @@ using QuanLyDeTaiBaoCaoTotNghiep.Models;
 using System.Data.Entity;
 using PagedList;
 using System.IO;
+using System.Data;
+using System.Text;
+
 
 namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
 {
@@ -22,12 +25,14 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
         // GET: Documentse
         public ActionResult Index(int ?page)
         {
+           
+
             int iSize = 12;
             int iPageNum = (page ?? 1);
 
             var d = (from t in db.GraduationReport select t).OrderByDescending(t => t.UploadDate);
+   
 
-          
             return View(d.OrderBy(s=> s.GraduationReportID).ToPagedList(iPageNum, iSize));
         }
         [HandleError]
@@ -51,23 +56,30 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
             }
         }
 
-        public ActionResult XemBaoCao(int ? id)
+        public ActionResult XemBaoCao(int? id)
         {
             //if (ModelState.IsValid)
             //{
 
+            var document = db.GraduationReport.Find(id);
+            document.ViewCount++;
+            db.SaveChanges();
 
             var dt = from s in db.GraduationReport where s.GraduationReportID == id select s;
+
             return View(dt.Single());
 
 
-    
-            
-
         }
+
+
 
         public ActionResult View(int ?id)
         {
+
+            var document = db.GraduationReport.Find(id);
+            document.ViewCount++;
+            db.SaveChanges();
             var dt = from s in db.GraduationReport where s.GraduationReportID == id select s;
             return View(dt.Single());
         }
@@ -303,7 +315,56 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
             db.SaveChanges();
             return RedirectToAction("Index");
         }
+        //public ActionResult ShareOnFacebook(int id)
+        //{
+        //    // Lấy thông tin tài liệu từ database
+        //    var document = db.GraduationReport.FirstOrDefault(d => d.GraduationReportID == id);
 
-       
+        //    string url = "https://ttt.com/Documents/XemBaoCao/" + id;
+        //    // Tạo đường dẫn chia sẻ trên Facebook
+        //    var shareUrl = "https://www.facebook.com/sharer/sharer.php?u=" + url;
+
+        //    // Redirect đến đường dẫn chia sẻ
+        //    return Redirect(shareUrl);
+        //}
+        public ActionResult Share(int id)
+        {
+            var post = db.GraduationReport.Find(id);
+            if (post == null)
+            {
+                return HttpNotFound();
+            }
+            return View(post);
+        }
+
+
+        public ActionResult DownloadFile(string filePath)
+        {
+            var document = db.GraduationReport.FirstOrDefault(x => x.UrlFile == filePath);
+
+            document.DownloadCount++;
+            db.SaveChanges();
+
+            string fullName = Server.MapPath("~/File/" + filePath);
+
+            byte[] fileBytes = GetFile(fullName);
+            return File(
+                fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, filePath);
+        }
+
+        byte[] GetFile(string s)
+        {
+            System.IO.FileStream fs = System.IO.File.OpenRead(s);
+            byte[] data = new byte[fs.Length];
+            int br = fs.Read(data, 0, data.Length);
+            if (br != fs.Length)
+                throw new System.IO.IOException(s);
+            return data;
+        }
+
+
+
+
+
     }
 }

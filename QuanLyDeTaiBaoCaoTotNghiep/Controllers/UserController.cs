@@ -21,6 +21,7 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
 
         static int idInfo = 0;
 
+
        static public int getid()
         {
             return idInfo;
@@ -99,7 +100,10 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
 
                         Session["TaiKhoan3"] = nguoidung.ID;
 
+                     
+
                         idInfo = nguoidung.ID;
+                      
 
                         if (nguoidung == ADMIN)
                         {
@@ -128,7 +132,8 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
 
             return View();
         }
-       
+        
+      
         public ActionResult SignUp()
         {
             return View();
@@ -205,7 +210,7 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
             }
             else
             {
-                ViewBag.ThongBao = "Tên đăng nhập hoặc mật khẩu không đúng";
+                ViewBag.ThongBao = "Đăng ký không thành công, vui lòng kiểm tra lại thông tin";
                 ViewBag.Message = status ? "Xác thực Google reCaptcha thành công !" : "Bạn chưa xác thực Google reCaptcha";
 
             }
@@ -279,6 +284,55 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
 
 
         }
+
+        [HttpPost]
+        public ActionResult SendEmail(FormCollection form)
+        {
+            if(Session == null)
+            {
+                ViewBag.ERR = "Chưa đăng nhập";
+            }
+            else
+            {
+
+           
+            
+            try
+            {
+                string to = "trantrungthang01699516993@gmail.com";
+                    //string from = Session["Email"].ToString();
+                    string from = "thangpy2k2@gmail.com";
+
+                    string subject = "ĐÓNG GÓP Ý KIẾN"; // chủ đề email
+                string mes = form["message"]; // nội dung email
+
+                // Khởi tạo đối tượng MailMessage
+                // Khởi tạo đối tượng SmtpClient và gửi email
+                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587); // SMTP server và cổng của email
+                smtpClient.Credentials = new NetworkCredential("trantrungthang01699516993@gmail.com", "iauopfthcsrhnunj"); // địa chỉ email và mật khẩu
+                smtpClient.EnableSsl = true; // kích hoạt SSL cho kết nối SMTP
+
+
+
+                using (var message = new MailMessage(from, to)
+                {
+                    Subject = subject,
+                    Body = mes,
+                    IsBodyHtml = true
+                })
+                    smtpClient.Send(message);
+            }
+            catch(Exception ex)
+            {
+                
+            }
+            }
+
+            return RedirectToAction("Index", "Documents");
+        }
+
+
+
         public ActionResult ForgotPassword()
         {
             return View();

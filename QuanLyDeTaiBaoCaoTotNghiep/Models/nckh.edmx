@@ -44,6 +44,8 @@
           <Property Name="Keyword" Type="ntext" />
           <Property Name="YearID" Type="int" />
           <Property Name="UploadDate" Type="datetime" />
+          <Property Name="ViewCount" Type="int" />
+          <Property Name="DownloadCount" Type="int" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -260,6 +262,8 @@
           <NavigationProperty Name="AcademicYear" Relationship="Self.FK_GraduationReport_AcademicYear" FromRole="GraduationReport" ToRole="AcademicYear" />
           <NavigationProperty Name="Class" Relationship="Self.FK_GraduationReport_Class" FromRole="GraduationReport" ToRole="Class" />
           <NavigationProperty Name="Faculty" Relationship="Self.FK_GraduationReport_Faculty" FromRole="GraduationReport" ToRole="Faculty" />
+          <Property Name="ViewCount" Type="Int32" />
+          <Property Name="DownloadCount" Type="Int32" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -491,6 +495,8 @@
           <EntitySetMapping Name="GraduationReport">
             <EntityTypeMapping TypeName="QuanLyDeTaiBCTNSVModel.GraduationReport">
               <MappingFragment StoreEntitySet="GraduationReport">
+                <ScalarProperty Name="DownloadCount" ColumnName="DownloadCount" />
+                <ScalarProperty Name="ViewCount" ColumnName="ViewCount" />
                 <ScalarProperty Name="GraduationReportID" ColumnName="GraduationReportID" />
                 <ScalarProperty Name="GraduationReportName" ColumnName="GraduationReportName" />
                 <ScalarProperty Name="Image" ColumnName="Image" />

@@ -11,8 +11,7 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Models
 {
     using System;
     using System.Collections.Generic;
-    using System.ComponentModel;
-
+    
     public partial class AcademicYear
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -21,9 +20,8 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Models
             this.GraduationReport = new HashSet<GraduationReport>();
             this.Users = new HashSet<Users>();
         }
-        [DisplayName("ID")]
+    
         public int YearID { get; set; }
-        [DisplayName("Niên khóa")]
         public string Name { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

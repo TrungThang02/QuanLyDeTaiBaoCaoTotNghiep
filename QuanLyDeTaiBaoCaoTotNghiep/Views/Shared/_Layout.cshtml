@@ -38,7 +38,7 @@
             font-family: "Open Sans", sans-serif;
             text-rendering: optimizeLegibility;
             -webkit-font-smoothing: antialiased !important;
-            line-height: 26px;
+        /*    line-height: 26px;*/
             font-size: 15px;
             overflow: hidden;
           
@@ -185,7 +185,7 @@
         }
 
             .product-image a > img {
-                height: 300px;
+               height: 250px;
                 width: 100%;
                 object-fit: cover;
                 border-radius: 10px 10px 0 0;
@@ -193,7 +193,7 @@
             }
 
         .product-grid .product-content {
-            padding: 8px;
+          
             background: #f3f3f3;
           
             border-radius : 0 0 10px 10px;
@@ -309,13 +309,17 @@
             justify-content: center;
         }
         a:link, a:visited {
-            font-family: "Montserrat", sans-serif;
-            font-weight : 500;
-        }
-        .ts-newsletter:after {
-           
-}
+            font-family: "Open Sans", sans-serif;
+            font-weight :500;
+            font-size : 14px;
 
+        }
+        .view {
+            display: flex;
+            justify-content: space-between;
+           padding : 0 5px 5px 5px;
+
+        }
     </style>
 </head>
 <body>
@@ -686,15 +690,15 @@
                     <div class="col-lg-12">
                         <div class="ts-newsletter row align-items-center">
                             <div class="col-md-5 newsletter-introtext">
-                                <h4 class="mb-0">ĐĂNG KÝ ĐỂ NHẬN THÔNG BÁO</h4>
+                                <h4 class="mb-0">ĐÓNG GÓP Ý KIÉN</h4>
 
                             </div>
 
                             <div class="col-md-6 newsletter-form">
-                                <form action="#" method="post">
+                                <form action="/User/SendEmail" method="post">
                                     <div class="form-group">
                                         <label for="newsletter-email" class="content-hidden">Newsletter Email</label>
-                                        <input type="email" name="email" id="newsletter-email" class="form-control form-control-lg" placeholder="Nhập email của bạn" autocomplete="off">
+                                        <input type="text" name="message" id="newsletter-email" class="form-control form-control-lg" placeholder="Nhập nội dung..." autocomplete="off">
                                     </div>
                                 </form>
                             </div>

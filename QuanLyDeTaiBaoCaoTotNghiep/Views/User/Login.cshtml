@@ -50,11 +50,11 @@
                         </div>
                         <!-- Checkbox -->
                         <div class="form-group text-right">
-                          
+
                             <label class="form-label"><a href="@Url.Action("ForgotPassword","User")" style="font-style: italic; text-align:right; color :#3b5998">Quên mật khẩu ?</a></label>
                         </div>
-                        <p style="color: red">@ViewBag.Message</p>
-                        <p style="color: red">@ViewBag.ThongBao</p>
+                        <p style="color: red; font-weight: bold; text-align: center">@ViewBag.ThongBao</p>
+                        @*<p style="color: red">@ViewBag.ThongBao</p>*@
                         <button class="btn btn-primary btn-lg btn-block btn-primary mb-1 form-control" type="submit">Đăng nhập</button>
                         <div class="form-group text-center">
                             <span class="form-label text-center">Chưa có tài khoản, nhấp <a href="/User/SignUp" class="font-weight-bold text-center">vào đây</a> để đăng ký !</span>
