@@ -1,7 +1,7 @@
 ﻿
 @{
     ViewBag.Title = "Quanlibaocao";
-    Layout = "~/Views/Shared/_LayoutUser.cshtml";
+    Layout = "~/Views/Shared/_LayoutInfo.cshtml";
 }
 @{ var id = Session["TaiKhoan3"];
 }
@@ -12,118 +12,189 @@
     <head>
         <meta name="viewport" content="width=device-width" />
         <title>Index</title>
-
         <style>
-   
-
-            .img {
-                border-radius: 10px;
-                height: 110px;
-                object-fit: cover;
-                box-shadow: rgba(9, 30, 66, 0.25) 0px 4px 8px -2px, rgba(9, 30, 66, 0.08) 0px 0px 0px 1px;
-            }
-
-            td {
-                vertical-align: baseline;
-                align-items: center;
-            }
-
-            .table td, .table th {
-        
-                border-top: none;
-            }
-
-            p {
+            .card {
+                --bg: #f7f7f8;
+                --hover-bg: #f3f3f3;
+                --hover-text: #E50087;
                 width: 200px;
+                height: 250px;
+                text-align: center;
+                box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 2px 0px;
+                border-radius: 10px;
+                position: relative;
                 overflow: hidden;
+                transition: .3s cubic-bezier(.6,.4,0,1),transform .15s ease;
+                display: flex;
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                gap: 1em;
+                margin: 10px;
+            }
+
+            .card__body {
+                color: #464853;
+                line-height: 1.5em;
+                font-size: 1em;
+                color : #fff;
+              
+            }
+
+            .text{
+                display :flex;
+
+                height : 70px;
+                background : #333;
+                display : flex;
+                justify-content : center;
+                align-items : center;
+            }
+
+            .card > :not(span) {
+                transition: .3s cubic-bezier(.6,.4,0,1);
+            }
+
+            .card > strong {
+                display: block;
+                font-size: 1.4rem;
+                letter-spacing: -.035em;
+            }
+
+            .card span {
+                position: absolute;
+                inset: 0;
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: var(--hover-text);
+                border-radius: 5px;
+                font-weight: bold;
+                top: 100%;
+                transition: all .3s cubic-bezier(.6,.4,0,1);
+            }
+
+            .card:hover span {
+                top: 0;
+                font-size: 1.2em;
+            }
+
+            .card:hover {
+                background: var(--hover-bg);
+            }
+
+                .card:hover > div, .card:hover > strong {
+                    opacity: 0;
+                }
+            .product-image img{
+                width : 200px;
+                height : 200px;
+                object-fit : cover;
+            }
+            .product-image {
+                width: 200px;
+                height: 200px;
+                object-fit: cover;
+            }
+
+            .btn-hover i {
+                background: #00ff7f;
+                padding: 10px;
+                margin: 4px;
+                box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 2px 0px;
+                border-radius: 50%;
+                color: #fff;
+            }
+
+            .b i {
+                background: red;
+            }
+
+            .text p {
+                font-size: 14px;
+                width: 180px;
                 white-space: nowrap;
+                overflow: hidden;
                 text-overflow: ellipsis;
             }
+        </style>
+        <style>
 
-            .info, .bg {
-                flex-wrap: wrap;
-                border-radius: 10px;
-                margin: 20px;
-                display: flex;
-                align-items: center;
-            }
-
-            .bg {
-                box-shadow: rgba(50, 50, 105, 0.15) 0px 2px 5px 0px, rgba(0, 0, 0, 0.05) 0px 1px 1px 0px;
-            }
             .items {
-                margin: 0 0 20px 0;
-                border-radius: 10px;
+                margin: 10px 10px 20px 10px;
+                border-radius: 8px;
                 align-items: center;
-                padding: 15px;
+                padding: 10px;
                 background: #248afd;
-                color : #fff;
-                font-weight : 500;
+                color: #fff;
+                font-weight: 500;
             }
+
+            .info-item {
+                background: #f3f3f3;
+                display: flex;
+                justify-content: space-evenly;
+                flex-wrap: wrap;
+                align-items: center;
+                border-radius: 10px;
+                padding: 20px;
+            }
+            .info {
+                width: 500px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+               
+            }
+    
         </style>
     </head>
 
     <body>
-        <div class="container" style="width : fit-content">
-            <div style="margin : 20px 0 20px 0; display:flex; justify-content : center" class="bg file">
+        <div class="container mt-2 mb-2">
+            <div class="info-item">
                 <div class="info">
-                    <div class="d-block">
+                    <div class="d-flex">
                         <div class="items"><a href="/User/Thaydoithongtin/@id">Cập nhật thông tin</a></div>
                         <div class="items"><a href="/Documents/Create">Tải lên báo cáo</a></div>
-                        <div class="items"><a href="@Url.Action("ForgotPassword","User")">Thay đổi mật khẩu</a></div>
+                        
                     </div>
                 </div>
-                <div class="document">
-
-                    <table class="table">
-                        <tr>
-                            <th>
-                                Tên báo cáo
-                            </th>
-
-                            @*<th>
-                                Lớp
-                            </th>*@
-                 
-                            @*<th>
-                                Niên khóa
-                            </th>*@
-                            <th></th>
-                        </tr>
-
-                        @foreach (var item in Model)
-                        {
-                            <tr>
-                                <td>
-                                    <p>@item.GraduationReportName</p>
-
-                                </td>
-                                
-                                @*<td>
-                                    <p>@item.Class.ClassName</p>
-                                 
-                                </td>*@
-                        
-                                @*<td>
-                                    <p>@item.AcademicYear.Name</p>
-                                </td>*@
-                                <td>
-                                    <a href="/Documents/Edit/@item.GraduationReportID" class="btn btn-success">Sửa</a>
-
-                                    <a data-id="@item.GraduationReportID" class="btn btn-danger delete">Xóa</a>
 
 
-
-                                </td>
-                            </tr>
-                        }
-
-                    </table>
-                </div>
-            </div>
-        </div>
       
-           
+                    <div class="row justify-content-center">
+                        @foreach (var dt in Model)
+                        {
+                            <div class="card">
+                                <div class="card__body">
+                                    <div class="product-image">
+                                        <img src="~/Content/images/AnhBaoCao/@dt.Image">
+                                    </div>
+                                    <div class="text">
+                                        <p>@dt.GraduationReportName</p>
+                                    </div>
+
+                                </div>
+                                <span class="edit">
+                                    <div class="btn-hover">
+                                        <a href="/Documents/Edit/@dt.GraduationReportID"><i class="fa-solid fa-pen a"></i></a>
+                                    </div>
+                                    <div class="btn-hover b">
+                                        <a data-id="@dt.GraduationReportID" class="delete"><i class="fa-sharp fa-solid fa-circle-xmark b"></i></a>
+                                        </div>
+                                </span>
+                            </div>
+                        }
+                   
+                    </div>
+                    </div>
+            </div>
+
+      
+  
     </body>
 </html>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>

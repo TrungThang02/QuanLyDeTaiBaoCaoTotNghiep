@@ -511,6 +511,9 @@
     <Content Include="Views\User\Thaydoithongtin.cshtml" />
     <Content Include="Views\Home\Khongcodulieu.cshtml" />
     <Content Include="Views\Documents\View.cshtml" />
+    <Content Include="Views\Documents\BaoCaoXemNhieu.cshtml" />
+    <Content Include="Views\Documents\BaoCaoTaiNhieu.cshtml" />
+    <Content Include="Views\Shared\_LayoutInfo.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -158,13 +158,15 @@
         }
 
         .product-grid {
-           
             margin-bottom: 50px;
-            border-radius:10px;
+            border-radius: 10px;
             font-family: 'Oswald', sans-serif;
             text-align: center;
+            transition-duration: .3s;
+            transition-property: transform;
+            transition-timing-function: ease-out;
             /*border: 1px solid #333;*/
-  /*          height: 350px;*/
+            /*          height: 350px;*/
             justify-content: center;
             box-shadow: rgba(0, 0, 0, 0.5) 0px 1px 2px 0px;
         }
@@ -175,6 +177,9 @@
             -moz-transform: skewY(-0.5deg);
             transform: skewY(-0.5deg);
             -webkit-backface-visibility: hidden;*/
+    
+                transform: translateY(-20px);
+            
             }
 
         .product-image {
@@ -318,6 +323,8 @@
             display: flex;
             justify-content: space-between;
            padding : 0 5px 5px 5px;
+           box-sizing :border-box;
+           margin : 0 20px 0 20px;
 
         }
     </style>
@@ -509,20 +516,30 @@
         </style>
         <section id="news" class="news">
             <div class="container">
-              
-                    <div class="bcgd">
 
-                        <h5 class="text-center">BÁO CÁO GẦN ĐÂY</h5>
-                    </div>
+
 
                 <!--/ Title row end -->
-                <div class="row">
-                    @Html.Action("BaoCaoGanDay", "Home")
+                <div class="bcgd">
+
+                    <h5 class="text-center">XEM NHIỀU NHẤT</h5>
                 </div>
+                <div class="row">
+                    @Html.Action("BaoCaoXemNhieu", "Documents")
+                </div>
+                <div class="bcgd">
+
+                    <h5 class="text-center">TẢI NHIỀU NHẤT</h5>
+                </div>
+
+                <div class="row">
+                    @Html.Action("BaoCaoTaiNhieu", "Documents")
+                </div>
+
                 <!--/ Content row end -->
                 @*<div class="general-btn text-center mt-4">
-                    <a class="btn btn-primary" href="news-left-sidebar.html">XEM TẤT CẢ</a>
-                </div>*@
+            <a class="btn btn-primary" href="news-left-sidebar.html">XEM TẤT CẢ</a>
+        </div>*@
 
             </div>
             <!--/ Container end -->

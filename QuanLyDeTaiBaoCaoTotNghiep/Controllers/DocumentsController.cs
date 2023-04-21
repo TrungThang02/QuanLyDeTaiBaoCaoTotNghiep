@@ -363,8 +363,16 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
         }
 
 
+        public ActionResult BaoCaoXemNhieu()
+        {
+            var bc = from s in db.GraduationReport select s;
+            return PartialView(bc.OrderByDescending(n => n.ViewCount).ToList().Take(8));
+        }
 
-
-
+        public ActionResult BaoCaoTaiNhieu()
+        {
+            var bc = from s in db.GraduationReport select s;
+            return PartialView(bc.OrderByDescending(n => n.DownloadCount).ToList().Take(8));
+        }
     }
 }

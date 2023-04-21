@@ -8,7 +8,18 @@
     ViewBag.Title = "Index";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
+<style>
+    hr {
+        background-color: #333;
+      
+        height:1px;
+        margin:  0;
+        margin-bottom : 2px;
+    }
+    .tieude{
+        font-weight : bold;
+    }
+</style>
 <div class="bcgd" style="margin-top : 20px">
 
     <h5 class="text-center">BÁO CÁO MỚI NHẤT</h5>
@@ -30,8 +41,9 @@
                     </div>
                     <div class="product-content">
                         <div class="text">
-                            <a href="/Documents/CheckTypeFile/@dt.GraduationReportID"> @dt.GraduationReportName.ToUpper()</a>
+                            <a href="/Documents/CheckTypeFile/@dt.GraduationReportID" class="tieude"> @dt.GraduationReportName</a>
                         </div>
+                        <hr/>
                         <div class="view">
                             <span><i class="fa-regular fa-eye"></i> @dt.ViewCount</span>
                             <span><i class="fa-solid fa-download"></i> @dt.DownloadCount</span>
