@@ -18,7 +18,7 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
     {
 
         UserController Users = new UserController();
-
+       
 
         
         QuanLyDeTaiBCTNSVEntities db = new QuanLyDeTaiBCTNSVEntities();
@@ -30,7 +30,7 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
             int iSize = 12;
             int iPageNum = (page ?? 1);
 
-            var d = (from t in db.GraduationReport select t).OrderByDescending(t => t.UploadDate);
+            var d = (from t in db.GraduationReport select t).OrderByDescending(t => t.UploadDate).Where(r => r.Status == true);
    
 
             return View(d.OrderBy(s=> s.GraduationReportID).ToPagedList(iPageNum, iSize));
@@ -87,7 +87,7 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
         {
 
          
-            var detai = (from s in db.GraduationReport select s).OrderByDescending(s => s.UploadDate).Take(10);
+            var detai = (from s in db.GraduationReport select s).OrderByDescending(s => s.UploadDate).Take(10).Where(r => r.Status == true);
             
             return PartialView(detai);
         }
@@ -110,6 +110,8 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
         [HttpPost, ValidateInput(false)]
         public ActionResult Create(GraduationReport baocao, HttpPostedFileBase image, HttpPostedFileBase file, FormCollection f)
         {
+
+         
             ViewBag.ClassID = new SelectList(db.Class, "ClassID", "ClassName");
             ViewBag.FacultyID = new SelectList(db.Faculty, "FacultyID", "FacultyName");
             ViewBag.YearID = new SelectList(db.AcademicYear, "YearID", "Name");
@@ -172,14 +174,14 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
                     baocao.UploadDate = Convert.ToDateTime(f["dNgayCapNhat"]);
                     baocao.ID = Convert.ToInt32(f["UserID"]);
                     //sach.NgayCapNhat = Convert.ToDateTime(f["dNgayCapNhat"]);
-
+                    baocao.Author = f["tentacgia"];
 
                     baocao.ClassID = Convert.ToInt32(f["ClassID"]);
                     baocao.FacultyID = Convert.ToInt32(f["FacultyID"]);
                     baocao.YearID = Convert.ToInt32(f["YearID"]);
                     db.GraduationReport.Add(baocao);
                     db.SaveChanges();
-                    return RedirectToAction("Index");
+                    return Redirect("/User/Info/" + Session["TaiKhoan3"]);
                 }
 
                 return View();
@@ -313,7 +315,7 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
             GraduationReport graduationReport = db.GraduationReport.Find(id);
             db.GraduationReport.Remove(graduationReport);
             db.SaveChanges();
-            return RedirectToAction("Index");
+            return Redirect("/User/Info/" + Session["TaiKhoan3"]);
         }
         //public ActionResult ShareOnFacebook(int id)
         //{
@@ -365,13 +367,13 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
 
         public ActionResult BaoCaoXemNhieu()
         {
-            var bc = from s in db.GraduationReport select s;
+            var bc = (from s in db.GraduationReport select s).Where(r => r.Status == true);
             return PartialView(bc.OrderByDescending(n => n.ViewCount).ToList().Take(8));
         }
 
         public ActionResult BaoCaoTaiNhieu()
         {
-            var bc = from s in db.GraduationReport select s;
+            var bc = (from s in db.GraduationReport select s).Where(r => r.Status == true);
             return PartialView(bc.OrderByDescending(n => n.DownloadCount).ToList().Take(8));
         }
     }

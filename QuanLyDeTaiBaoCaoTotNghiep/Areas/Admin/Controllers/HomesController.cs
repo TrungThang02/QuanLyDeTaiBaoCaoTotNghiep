@@ -21,18 +21,22 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Areas.Admin.Controllers
 
             var tstk = (from s in db.Users select s).Count();
             ViewBag.tongtaikhoan = tstk;
-            //if (Session["ADMIN"] != null)
-            //{
 
+            int totalViews = db.GraduationReport.Sum(r => r.ViewCount);
+            ViewBag.totalView = totalViews;
 
+            int totalDowns = db.GraduationReport.Sum(r => r.DownloadCount);
+            ViewBag.totalDown = totalDowns;
+           if(Session["ADMIN"] != null)
+           {
             return View();
-            //}
-            //else
-            //{
-            //    return RedirectToAction("Erorr", "GraduationReport");
-            //}
+            }
+            else
+            {
+                return RedirectToAction("Erorr", "GraduationReport");
+            }
 
-          
+
         }
     }
 }

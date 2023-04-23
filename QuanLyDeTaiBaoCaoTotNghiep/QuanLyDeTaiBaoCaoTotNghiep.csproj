@@ -362,6 +362,7 @@
     <Content Include="Content\plugins\slick\slick-theme.css" />
     <Content Include="Content\plugins\slick\slick.css" />
     <Content Include="Content\plugins\slick\slick.min.js" />
+    <Content Include="Scripts\Sticky.js" />
     <Content Include="ViewerJS\compatibility.js" />
     <Content Include="ViewerJS\example.local.css" />
     <Content Include="ViewerJS\images\kogmbh.png" />
@@ -456,6 +457,10 @@
     <Content Include="Areas\Admin\Views\Faculty\Details.cshtml" />
     <Content Include="Areas\Admin\Views\Faculty\Edit.cshtml" />
     <Content Include="Areas\Admin\Views\Faculty\Index.cshtml" />
+    <Content Include="Areas\Admin\Views\GraduationReport\UnapprovedReports.cshtml" />
+    <None Include="Properties\PublishProfiles\trungthangnckh-001-site1 - FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\trungthangnckh-001-site1 - FTP1.pubxml" />
+    <None Include="Properties\PublishProfiles\trungthangnckh-001-site1 - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.4.1.intellisense.js" />
     <Content Include="Scripts\Docfile.js" />
     <Content Include="Scripts\jquery-3.4.1.js" />

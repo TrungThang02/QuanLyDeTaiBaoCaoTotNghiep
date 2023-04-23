@@ -28,9 +28,17 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Areas.Admin.Controllers
             int iSize = 3;
             int iPageNum = (page ?? 1);
             var graduationReport = db.GraduationReport.Include(g => g.Class).Include(g => g.Faculty).ToList();
-
-         
+            if (Session["ADMIN"] != null)
+            {
                 return View(graduationReport.OrderBy(x => x.GraduationReportID).ToPagedList(iPageNum, iSize));
+            }
+            else
+            {
+                return RedirectToAction("Erorr", "GraduationReport");
+            }
+
+
+           
 
 
            // }
@@ -195,50 +203,59 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Areas.Admin.Controllers
             {
                 try
                 {
-                    if (image != null || image.ContentLength > 0 && file != null || file.ContentLength > 0)
+                    if (image != null && image.ContentLength > 0)
                     {
-                        var newFile = Guid.NewGuid();
-                        var renamefile = Path.GetExtension(file.FileName);
-                        string newName = newFile + renamefile;
-                        //lấy tên file, khai báo thư viện(System IO)
-
-                        string sFileName2 = Path.GetFileName(newName);
-
-                        var newImage = Guid.NewGuid();
-                        var renameImage = Path.GetExtension(image.FileName);
-                        string newImageName = newImage + renameImage;
-                        //lấy tên file, khai báo thư viện(System IO)
-
-                        var sFileName = Path.GetFileName(newImageName);
-
-
-
-                        //Lấy đường dẫn lưu file
-                        var path = Path.Combine(Server.MapPath("~/Content/images/AnhBaoCao"), sFileName);
-                        string path2 = Path.Combine(Server.MapPath("~/File"), sFileName2);
-                        file.SaveAs(path2);
-                        image.SaveAs(path);
-                        //Kiểm tra ảnh đã được tải lên chưa
-                        //Kiểm tra ảnh đã được tải lên chưa
-                        if (!System.IO.File.Exists(path) && !System.IO.File.Exists(path2))
+                        if (file != null && file.ContentLength > 0)
                         {
-                            System.IO.File.Delete(path);
-                            System.IO.File.Delete(path2);
+                            var newFile = Guid.NewGuid();
+                            var renamefile = Path.GetExtension(file.FileName);
+                            string newName = newFile + renamefile;
+                            //lấy tên file, khai báo thư viện(System IO)
 
-                        }
-                        else
-                        {
-                            image.SaveAs(path);
+                            string sFileName2 = Path.GetFileName(newName);
+
+                            var newImage = Guid.NewGuid();
+                            var renameImage = Path.GetExtension(image.FileName);
+                            string newImageName = newImage + renameImage;
+                            //lấy tên file, khai báo thư viện(System IO)
+
+                            var sFileName = Path.GetFileName(newImageName);
+
+
+
+                            //Lấy đường dẫn lưu file
+                            var path = Path.Combine(Server.MapPath("~/Content/images/AnhBaoCao"), sFileName);
+                            string path2 = Path.Combine(Server.MapPath("~/File"), sFileName2);
                             file.SaveAs(path2);
-                            baocao.Image = sFileName;
-                            baocao.UrlFile = sFileName2;
+                            image.SaveAs(path);
+                            //Kiểm tra ảnh đã được tải lên chưa
+                            //Kiểm tra ảnh đã được tải lên chưa
+                            if (!System.IO.File.Exists(path) && !System.IO.File.Exists(path2))
+                            {
+                                System.IO.File.Delete(path);
+                                System.IO.File.Delete(path2);
+
+                            }
+                            else
+                            {
+                                image.SaveAs(path);
+                                file.SaveAs(path2);
+                                baocao.Image = sFileName;
+                                baocao.UrlFile = sFileName2;
+                            }
+
                         }
 
+
+                    }
+                    else
+                    {
+                        ViewBag.Message = "Please select a file to upload";
                     }
 
                     baocao.GraduationReportName = f["sTenSach"];
                     baocao.Description = f["sMoTa"].Replace("<p>", "").Replace("<p>", "\n");
-
+                    baocao.Author = f["tentacgia"];
 
                     baocao.Keyword = f["sKeyword"];
                     baocao.UploadDate = Convert.ToDateTime(f["dNgayCapNhat"]);
@@ -250,8 +267,10 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Areas.Admin.Controllers
                     baocao.YearID = Convert.ToInt32(f["YearID"]);
 
                     db.SaveChanges();
+
+
                     return RedirectToAction("Index");
-                   
+
                 }
                 catch (Exception ex)
                 {
@@ -260,7 +279,6 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Areas.Admin.Controllers
 
 
 
-                
             }
             return View();
         }
@@ -283,7 +301,25 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Areas.Admin.Controllers
         {
             return View();
         }
+        public ActionResult UnapprovedReports()
+        {
+            var reports = db.GraduationReport.Where(r => r.Status == false).ToList();
+            return View(reports);
+        }
 
-       
+        public ActionResult ApproveDocument(int id)
+        {
+            var report = db.GraduationReport.Find(id);
+            if (report == null)
+            {
+                return HttpNotFound();
+            }
+            report.Status = true;
+            db.Entry(report).State = EntityState.Modified;
+            db.SaveChanges();
+            return RedirectToAction("UnapprovedReports");
+        }
+
+
     }
 }

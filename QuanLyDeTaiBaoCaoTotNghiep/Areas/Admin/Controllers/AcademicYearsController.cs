@@ -20,7 +20,16 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Areas.Admin.Controllers
         {
             int iSize = 7;
             int iPageNum = (page ?? 1);
-            return View(db.AcademicYear.OrderBy(x=> x.YearID).ToList().ToPagedList(iPageNum, iSize));
+            if (Session["ADMIN"] != null)
+            {
+                return View(db.AcademicYear.OrderBy(x => x.YearID).ToList().ToPagedList(iPageNum, iSize));
+            }
+            else
+            {
+                return RedirectToAction("Erorr", "GraduationReport");
+            }
+
+          
         }
 
         // GET: Admin/AcademicYears/Details/5

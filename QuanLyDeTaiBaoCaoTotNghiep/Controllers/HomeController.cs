@@ -94,7 +94,7 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
             ViewBag.search = search;
             var sl = products.Count();
             ViewBag.sl = sl;
-            return View(products);
+            return View(products.Where(r => r.Status == true));
         }
         public ActionResult SearchCategory(string searchString, int categoryID = 0, int year = 0)
         {
@@ -120,7 +120,7 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
             ViewBag.YearID = new SelectList(db.AcademicYear, "YearID", "Name");// danh sách Category
             var sl = tk.Count();
             ViewBag.sl = sl;
-            return View(tk.ToList());
+            return View(tk.ToList().Where(r => r.Status == true));
         }
 
         public ActionResult K()

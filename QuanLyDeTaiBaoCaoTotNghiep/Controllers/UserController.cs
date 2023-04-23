@@ -10,6 +10,7 @@ using System.Text;
 using System.Web;
 using System.Web.Mvc;
 using Newtonsoft.Json.Linq;
+using PagedList;
 using QuanLyDeTaiBaoCaoTotNghiep.Models;
 
 namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
@@ -57,8 +58,8 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
         public ActionResult Login(FormCollection collection)
         {
             var response = Request["g-recaptcha-response"];
-            string secretKey = "6Let3L0jAAAAAPx3bZRlTYo3gt-0rfbbrmCFIsvk";
-            //string secretKey = "6LdPxmAlAAAAAI5URX6z8aUgEKjPUTK5AFn13uuA";
+            //string secretKey = "6Let3L0jAAAAAPx3bZRlTYo3gt-0rfbbrmCFIsvk";
+            string secretKey = "6LdPxmAlAAAAAI5URX6z8aUgEKjPUTK5AFn13uuA";
             var client = new WebClient();
 
             var result = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secretKey, response));
@@ -143,8 +144,8 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
         public ActionResult SignUp(FormCollection collection, Users nguoidung)
         {
             var response = Request["g-recaptcha-response"];
-            string secretKey = "6Let3L0jAAAAAPx3bZRlTYo3gt-0rfbbrmCFIsvk";
-            //string secretKey = "6LdPxmAlAAAAAI5URX6z8aUgEKjPUTK5AFn13uuA";
+            //string secretKey = "6Let3L0jAAAAAPx3bZRlTYo3gt-0rfbbrmCFIsvk";
+            string secretKey = "6LdPxmAlAAAAAI5URX6z8aUgEKjPUTK5AFn13uuA";
             var client = new WebClient();
 
             var result = client.DownloadString(string.Format("https://www.google.com/recaptcha/api/siteverify?secret={0}&response={1}", secretKey, response));
@@ -182,11 +183,11 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
 
                 else if (db.Users.SingleOrDefault(n => n.UserName == sTenDN) != null)
                 {
-                    ViewData["err8"] = "Tên đăng nhâp đã tồn tại";
+                    ViewBag.user = "Tên đăng nhập đã tồn tại";
                 }
                 else if (db.Users.SingleOrDefault(n => n.Email == sEmail) != null)
                 {
-                    ViewData["err9"] = "Email đã được sử dụng";
+                    ViewBag.mail = "Email đã được sử dụng";
                 }
                 else
                 {
@@ -403,19 +404,40 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
         }
 
 
-        public ActionResult Info(int ? id)
+        public ActionResult Info(int ? id, int? page)
         {
+            int iSize = 12;
+            int iPageNum = (page ?? 1);
+
             if (idInfo != id)
             {
                 return RedirectToAction("PageNotFound", "Error");
 
             }
 
+            try
+            {
+                int totalViews = (int)db.GraduationReport.Where(r => r.ID == id).Sum(r => r.ViewCount);
+                ViewBag.totalView = totalViews;
+
+                int totalDowns = (int)db.GraduationReport.Where(r => r.ID == id).Sum(r => r.DownloadCount);
+                ViewBag.totalDown = totalDowns;
+
+                int totalReport = db.GraduationReport.Where(r => r.ID == id).Count();
+                ViewBag.totalReport = totalReport;
+
+            }
+            catch(Exception)
+            {
+
+            }
+
+
+
             var bc = from s in db.GraduationReport where s.ID == id select s;
-            return View(bc.ToList());
+            return View(bc.OrderBy(s => s.GraduationReportID).ToPagedList(iPageNum, iSize).ToList());
         }
 
-        
         public ActionResult Thaydoithongtin(int? id)
         {
             //

@@ -37,6 +37,13 @@
         white-space: nowrap;
         text-overflow: ellipsis;
     }
+    td img {
+        height: 100px;
+        width: 100px;
+        object-fit: cover;
+        border-radius: 10px;
+        box-shadow: rgba(60, 64, 67, 0.3) 0px 1px 2px 0px, rgba(60, 64, 67, 0.15) 0px 2px 6px 2px;
+    }
 </style>
 @helper  Truncate(string s, int length)
 {
@@ -100,7 +107,7 @@
                 </td>
                 <td>
 
-                    <img src="~/content/images/anhbaocao/@item.Image" style="width:70px" />
+                    <img src="~/content/images/anhbaocao/@item.Image" />
                 </td>
                 <td>
                     <p class="product-description" style="max-width: 150px; overflow: hidden; text-overflow: ellipsis; line-height: 25px; -webkit-line-clamp: 3; height: 75px; display: -webkit-box; -webkit-box-orient: vertical; ">@item.Description</p>

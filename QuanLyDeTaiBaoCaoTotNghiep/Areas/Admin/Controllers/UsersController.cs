@@ -22,7 +22,17 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Areas.Admin.Controllers
             int iSize = 7;
             int iPageNum = (page ?? 1);
             var users = db.Users.Include(u => u.Class).Include(u => u.Faculty).Include(u => u.AcademicYear).ToList();
-            return View(users.OrderBy(x => x.ID).ToPagedList(iPageNum, iSize));
+
+            if (Session["ADMIN"] != null)
+            {
+                return View(users.OrderBy(x => x.ID).ToPagedList(iPageNum, iSize));
+            }
+            else
+            {
+                return RedirectToAction("Erorr", "GraduationReport");
+            }
+
+            
         }
 
         // GET: Admin/Users/Details/5

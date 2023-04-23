@@ -39,13 +39,13 @@
           <Property Name="Description" Type="ntext" Nullable="false" />
           <Property Name="ID" Type="int" />
           <Property Name="Author" Type="nvarchar" MaxLength="50" />
-          <Property Name="CommentID" Type="int" />
           <Property Name="UrlFile" Type="varchar(max)" Nullable="false" />
           <Property Name="Keyword" Type="ntext" />
           <Property Name="YearID" Type="int" />
           <Property Name="UploadDate" Type="datetime" />
-          <Property Name="ViewCount" Type="int" />
-          <Property Name="DownloadCount" Type="int" />
+          <Property Name="ViewCount" Type="int" Nullable="false" />
+          <Property Name="DownloadCount" Type="int" Nullable="false" />
+          <Property Name="Status" Type="bit" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -254,7 +254,6 @@
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="ID" Type="Int32" />
           <Property Name="Author" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <Property Name="CommentID" Type="Int32" />
           <Property Name="UrlFile" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="Keyword" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="YearID" Type="Int32" />
@@ -262,8 +261,9 @@
           <NavigationProperty Name="AcademicYear" Relationship="Self.FK_GraduationReport_AcademicYear" FromRole="GraduationReport" ToRole="AcademicYear" />
           <NavigationProperty Name="Class" Relationship="Self.FK_GraduationReport_Class" FromRole="GraduationReport" ToRole="Class" />
           <NavigationProperty Name="Faculty" Relationship="Self.FK_GraduationReport_Faculty" FromRole="GraduationReport" ToRole="Faculty" />
-          <Property Name="ViewCount" Type="Int32" />
-          <Property Name="DownloadCount" Type="Int32" />
+          <Property Name="ViewCount" Type="Int32" Nullable="false" />
+          <Property Name="DownloadCount" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Boolean" Nullable="false" />
         </EntityType>
         <EntityType Name="sysdiagrams">
           <Key>
@@ -495,6 +495,7 @@
           <EntitySetMapping Name="GraduationReport">
             <EntityTypeMapping TypeName="QuanLyDeTaiBCTNSVModel.GraduationReport">
               <MappingFragment StoreEntitySet="GraduationReport">
+                <ScalarProperty Name="Status" ColumnName="Status" />
                 <ScalarProperty Name="DownloadCount" ColumnName="DownloadCount" />
                 <ScalarProperty Name="ViewCount" ColumnName="ViewCount" />
                 <ScalarProperty Name="GraduationReportID" ColumnName="GraduationReportID" />
@@ -505,7 +506,6 @@
                 <ScalarProperty Name="Description" ColumnName="Description" />
                 <ScalarProperty Name="ID" ColumnName="ID" />
                 <ScalarProperty Name="Author" ColumnName="Author" />
-                <ScalarProperty Name="CommentID" ColumnName="CommentID" />
                 <ScalarProperty Name="UrlFile" ColumnName="UrlFile" />
                 <ScalarProperty Name="Keyword" ColumnName="Keyword" />
                 <ScalarProperty Name="YearID" ColumnName="YearID" />

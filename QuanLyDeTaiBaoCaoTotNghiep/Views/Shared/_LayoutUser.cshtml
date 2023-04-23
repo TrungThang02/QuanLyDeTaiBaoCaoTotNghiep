@@ -29,106 +29,126 @@
     <!-- Template styles-->
     <link rel="stylesheet" href="~/Content/css/style.css">
     <style>
-  
-        .logo img {
-            width: 140px;
-            height: auto;
+        @@media (prefers-reduced-motion: reduce) {
+            .fade {
+                transition: opacity 0.15s linear;
+            }
         }
+            #navbar {
+                background-color: #333;
+                transition: 0.3s all ease-in;
+            }
 
-        .banner-carousel-item {
-            background: url('https://blogger.googleusercontent.com/img/a/AVvXsEjCmVw1pDd5keMudTsQ63YTpLGunw7G3V382a-uIlS1N0-aUQ3eNlQvvKNt8EdNniOOpeXp_TUwLFAeHmvBQuLh32wQoj4cNKayu8OPhFB7tuAgVqxrvvRk-GqrW3hZnb_MtIigafYEZabCdWAn0jiDAljKo1tPCGa1nYMp2GGV9bUkb9t58ffzLcSLIQ=s16000');
-        }
 
-        .search-block .search-close {
-            background: #fff;
-            border-radius: 1px;
-            color: #007bff;
-        }
 
-            .search-block .search-close span {
+            .sticky {
+                z-index: 100000;
+                position: fixed;
+                top: 0;
+                width: 100%;
+                transition: 0.3s all ease-in;
+            }
+
+                .sticky + .content {
+                    padding-top: 60px;
+                }
+
+            .logo img {
+                width: 140px;
+                height: auto;
+            }
+
+            .banner-carousel-item {
+                background: url('https://blogger.googleusercontent.com/img/a/AVvXsEjCmVw1pDd5keMudTsQ63YTpLGunw7G3V382a-uIlS1N0-aUQ3eNlQvvKNt8EdNniOOpeXp_TUwLFAeHmvBQuLh32wQoj4cNKayu8OPhFB7tuAgVqxrvvRk-GqrW3hZnb_MtIigafYEZabCdWAn0jiDAljKo1tPCGa1nYMp2GGV9bUkb9t58ffzLcSLIQ=s16000');
+            }
+
+            .search-block .search-close {
+                background: #fff;
+                border-radius: 1px;
                 color: #007bff;
             }
 
-        .search-block {
-            padding: 10px;
-            background: #fff;
-        }
+                .search-block .search-close span {
+                    color: #007bff;
+                }
 
-            .search-block .form-control {
-                color: #007bff;
+            .search-block {
+                padding: 10px;
                 background: #fff;
             }
 
-        .spancp {
-            font-size: 15px;
-        }
+                .search-block .form-control {
+                    color: #007bff;
+                    background: #fff;
+                }
 
-        .section-sub-title {
-            margin: 0;
-        }
+            .spancp {
+                font-size: 15px;
+            }
 
-        /*  body, p {
-            font-family: "Montserrat", sans-serif;
-        }*/
+            .section-sub-title {
+                margin: 0;
+            }
 
-        .copyright {
-            padding: 15px;
-        }
 
-        #back-to-top .btn.btn-primary {
-            background: #007bff;
-        }
+            .copyright {
+                padding: 15px;
+            }
 
-        .dropdown-menu {
-            min-width: 270px;
-        }
+            #back-to-top .btn.btn-primary {
+                background: #007bff;
+            }
 
-        .header-one ul.navbar-nav > li {
-            padding-right: 50px;
-        }
+            .dropdown-menu {
+                min-width: 270px;
+            }
 
-        .header-one, .header-one .site-navigation {
-            background: none;
-        }
+            .header-one ul.navbar-nav > li {
+                padding-right: 50px;
+            }
 
-        ul.navbar-nav > li > a {
-            padding: 0;
-        }
+            .header-one, .header-one .site-navigation {
+                background: none;
+            }
 
-        .navbar-fixed {
-            z-index: 500;
-            position: fixed;
-            width: 100%;
-            top: 0;
-        }
+            ul.navbar-nav > li > a {
+                padding: 0;
+            }
+
+            .navbar-fixed {
+                z-index: 500;
+                position: fixed;
+                width: 100%;
+                top: 0px;
+            }
+        
+            
     </style>
 </head>
 <body style="overflow: hidden">
     <div id='af-preloader'>
 
-            <div class='af-preloader-wrap'>
+        <div class='af-preloader-wrap'>
 
-                <div class='af-sp af-sp-wave'></div>
-
-            </div>
+            <div class='af-sp af-sp-wave'></div>
 
         </div>
-        <script>
-            //<![CDATA[
 
-            window.addEventListener('load', function () {
+    </div>
+    <script>
+        //<![CDATA[
 
-                // document.querySelector('#af-preloader').style.display = 'none'
+        window.addEventListener('load', function () {
 
-                document.getElementById('af-preloader').style.display = 'none'
+            // document.querySelector('#af-preloader').style.display = 'none'
 
-            })
+            document.getElementById('af-preloader').style.display = 'none'
 
-            //]]></script>
+        })
+
+        //]]></script>
     <!--<div class="body-inner">-->
-
-
-        <!--/ Container end -->
+    <!--/ Container end -->
     <!--</div>-->
     <!--/ Topbar end -->
     <!-- Header start -->
@@ -178,111 +198,105 @@
             </div><!-- Container end -->
         </div>
         <marquee style="background:#fff ;padding:0;">Chào mừng bạn đến với hệ thống lưu trữ đồ án tốt nghiệp của sinh viên Đại học Thủ Dầu Một.</marquee>
-        <div class="site-navigation" style="background: #005180">
+        <div class="site-navigation" style="background: #005180" id="navbar">
             <div class="container">
-                <div class="row">
-                    <div class="col-lg-12">
-                        <nav class="navbar navbar-expand-lg navbar-dark p-0">
-                            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
-                                <span class="navbar-toggler-icon"></span>
-                            </button>
+                <div>
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <nav class="navbar navbar-expand-lg navbar-dark p-0">
+                                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbar-collapse" aria-expanded="false" aria-label="Toggle navigation">
+                                    <span class="navbar-toggler-icon"></span>
+                                </button>
 
-                            <div id="navbar-collapse" class="collapse navbar-collapse">
-                                <ul class="nav navbar-nav mr-auto">
-                                    <li class="nav-item dropdown">
-                                        <a href="/Documents/Index" class="nav-link">TRANG CHỦ</a>
+                                <div id="navbar-collapse" class="collapse navbar-collapse">
+                                    <ul class="nav navbar-nav mr-auto">
+                                        <li class="nav-item dropdown">
+                                            <a href="/Documents/Index" class="nav-link">TRANG CHỦ</a>
 
-                                    </li>
+                                        </li>
 
+                                        <li class="nav-item dropdown">
+                                            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">DANH MỤC BÁO CÁO <i class="fa fa-angle-down"></i></a>
+                                            <ul class="dropdown-menu dm" role="menu">
 
+                                                <li class="dropdown-submenu">
+                                                    <a href="#!" class="dropdown-toggle" data-toggle="dropdown">KHOA</a>
+                                                    <ul class="dropdown-menu dm">
+                                                        @Html.Action("Khoa", "Home")
 
-                                    @*<li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Projects <i class="fa fa-angle-down"></i></a>
-            <ul class="dropdown-menu" role="menu">
-                <li><a href="projects.html">Projects All</a></li>
-                <li><a href="projects-single.html">Projects Single</a></li>
-            </ul>
-        </li>*@
+                                                    </ul>
+                                                </li>
+                                                <li class="dropdown-submenu">
+                                                    <a href="#!" class="dropdown-toggle" data-toggle="dropdown">VIỆN</a>
+                                                    <ul class="dropdown-menu dm">
+                                                        @Html.Action("Vien", "Home")
 
-                                    @*<li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">Services <i class="fa fa-angle-down"></i></a>
-            <ul class="dropdown-menu" role="menu">
-                <li><a href="services.html">Services All</a></li>
-                <li><a href="service-single.html">Services Single</a></li>
-            </ul>
-        </li>*@
+                                                    </ul>
+                                                </li>
+                                                <li class="dropdown-submenu">
+                                                    <a href="#!" class="dropdown-toggle" data-toggle="dropdown">NIÊN KHÓA</a>
+                                                    <ul class="dropdown-menu dm">
+                                                        @Html.Action("NienKhoa", "Home")
 
-                                    <li class="nav-item dropdown">
-                                        <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">DANH MỤC BÁO CÁO <i class="fa fa-angle-down"></i></a>
-                                        <ul class="dropdown-menu" role="menu">
+                                                    </ul>
 
-                                            <li class="dropdown-submenu">
-                                                <a href="#!" class="dropdown-toggle" data-toggle="dropdown">KHOA</a>
-                                                <ul class="dropdown-menu">
-                                                    @Html.Action("Khoa", "Home")
-
-                                                </ul>
-
-                                            </li>
-                                            <li class="dropdown-submenu">
-                                                <a href="#!" class="dropdown-toggle" data-toggle="dropdown">VIỆN</a>
-                                                <ul class="dropdown-menu">
-                                                    @Html.Action("Vien", "Home")
-
-                                                </ul>
-
-                                            </li>
-                                            <li class="dropdown-submenu">
-                                                <a href="#!" class="dropdown-toggle" data-toggle="dropdown">NIÊN KHÓA</a>
-                                                <ul class="dropdown-menu">
-                                                    @Html.Action("NienKhoa", "Home")
-
-                                                </ul>
-
-                                            </li>
-                                        </ul>
-                                    </li>
-
-                                    @*<li class="nav-item dropdown">
-            <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">News <i class="fa fa-angle-down"></i></a>
-            <ul class="dropdown-menu" role="menu">
-                <li><a href="news-left-sidebar.html">News Left Sidebar</a></li>
-                <li><a href="news-right-sidebar.html">News Right Sidebar</a></li>
-                <li><a href="news-single.html">News Single</a></li>
-            </ul>
-        </li>*@
-                                
-                                    <li class="nav-item"><a class="nav-link" href="/Documents/GioiThieu">GIỚI THIỆU </a></li>
-                                </ul>
-                            </div>
-                        </nav>
+                                                </li>
+                                            </ul>
+                                        </li>
+                                        <li class="nav-item"><a class="nav-link" href="/Documents/GioiThieu">GIỚI THIỆU </a></li>
+                                    </ul>
+                                </div>
+                            </nav>
+                        </div>
+                        <!--/ Col end -->
                     </div>
-                    <!--/ Col end -->
                 </div>
                 <!--/ Row end -->
 
+                <div class="container">
+
+
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="myModal" role="dialog">
+                        <div class="modal-dialog">
+                            <!-- Modal content start-->
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 align="center">Tìm báo cáo</h5>
+
+                                </div>
+                                <div class="modal-body">
+                                    <form action="/Home/Search" style="display: flex">
+
+
+                                        <input type="search" class="form-control" id="search-field" value="" placeholder="Bạn cần tìm gì...?" style="background: #fff" name="search">
+
+
+                                        <button type="submit" class="btn btn-primary form-control" style="width:150px">Tìm kiếm</button>
+                                    </form>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-danger" data-dismiss="modal"><i class="fa-sharp fa-solid fa-circle-xmark"></i></button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+
                 <div class="nav-search">
-                    <span id="search"><i class="fa fa-search" style="color : #fff"></i></span>
+                    <span id="search" data-toggle="modal" data-target="#myModal"><i class="fa fa-search" style="color : #fff"></i></span>
+
                 </div><!-- Search end -->
 
-                <div class="search-block" style="display: none;">
-                    <form action="/Home/Search">
-                        <label for="search-field" class="w-100 mb-0">
 
-                            <input type="search" class="form-control" id="search-field" value="" placeholder="Bạn cần tìm gì...?" style="background: #fff" name="search">
-
-                        </label>
-                    </form>
-                    <span class="search-close">&times;</span>
-                </div><!-- Site search end -->
             </div>
-            <!--/ Container end -->
-
         </div>
+        <!--/ Container end -->
         <!--/ Navigation end -->
     </header>
-
-
+    <!--/ Header end -->
     @RenderBody()
 
 
@@ -370,7 +384,7 @@
     <script src="~/Content/plugins/bootstrap/bootstrap.min.js" defer></script>
     <!-- Slick Carousel -->
     @*<script src="~/Content/plugins/slick/slick.min.js"></script>
-    <script src="~/Content/plugins/slick/slick-animation.min.js"></script>*@
+        <script src="~/Content/plugins/slick/slick-animation.min.js"></script>*@
     <!-- Color box -->
     @*<script src="~/Content/plugins/colorbox/jquery.colorbox.js"></script>*@
     <!-- shuffle -->
@@ -492,9 +506,51 @@
     </style>
 
 
+    <script>
+        window.onscroll = function () { myFunction() };
 
+        var navbar = document.getElementById("navbar");
+        var sticky = navbar.offsetTop;
 
+        function myFunction() {
+            if (window.pageYOffset >= sticky) {
+                navbar.classList.add("sticky")
+            } else {
+                navbar.classList.remove("sticky");
+            }
+        }
+    </script>
 
+    <!-- Messenger Plugin chat Code -->
+    <div id="fb-root"></div>
+
+    <!-- Your Plugin chat code -->
+    <div id="fb-customer-chat" class="fb-customerchat">
+    </div>
+
+    <script>
+        var chatbox = document.getElementById('fb-customer-chat');
+        chatbox.setAttribute("page_id", "101909135675434");
+        chatbox.setAttribute("attribution", "biz_inbox");
+    </script>
+
+    <!-- Your SDK code -->
+    <script>
+        window.fbAsyncInit = function () {
+            FB.init({
+                xfbml: true,
+                version: 'v16.0'
+            });
+        };
+
+        (function (d, s, id) {
+            var js, fjs = d.getElementsByTagName(s)[0];
+            if (d.getElementById(id)) return;
+            js = d.createElement(s); js.id = id;
+            js.src = 'https://connect.facebook.net/vi_VN/sdk/xfbml.customerchat.js';
+            fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+    </script>
 </body>
 
 </html>
