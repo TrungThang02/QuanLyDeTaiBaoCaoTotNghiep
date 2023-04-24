@@ -1,13 +1,22 @@
-﻿
+﻿<style>
+    .media-body{
+        margin : 0;
+    }
+</style>
 @foreach (var d in Model)
 {
     <div>
-        <div class="media" data-toggle-tool="tooltip" data-custom-class="tooltip-danger" data-placement="left" title="@d.GraduationReportName">
+        <div class="media center" data-toggle-tool="tooltip" data-custom-class="tooltip-danger" data-placement="left" title="@d.GraduationReportName">
             <i class="ti-zip icon-md text-primary d-flex align-self-start mr-1"></i>
             <div class="media-body">
-                <a href="/Documents/XemBaoCao/@d.GraduationReportID"> @d.GraduationReportName.ToUpper()</a>
+                <a href="/Documents/XemBaoCao/@d.GraduationReportID"> @d.GraduationReportName</a>
 
-
+                <ul>
+                    <center>
+                    <li class="float-left"><i class="fa-regular fa-eye"></i>@d.ViewCount</li>
+                    <li class="float-right"><i class="fa-solid fa-download"></i>@d.DownloadCount</li>
+                    </center>
+                </ul>
             </div>
 
         </div>
@@ -16,8 +25,13 @@
 }
 
 <style>
-    a {
+    ul i{
+        font-size : 0.7rem;
+    }
+    .media-body a {
+        text-transform : capitalize;
         color: #333;
+        font-size : 14px;
     }
     hr{
         margin : 0;

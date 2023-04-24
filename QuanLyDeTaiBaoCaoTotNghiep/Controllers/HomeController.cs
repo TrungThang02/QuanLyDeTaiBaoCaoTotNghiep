@@ -63,6 +63,19 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
         }
 
 
+        public ActionResult Faculty(int? id)
+        {
+            var fa = from s in db.GraduationReport
+                       join c in db.Faculty on s.FacultyID equals c.FacultyID
+                       where s.FacultyID == id
+                       select s;
+
+            var sl = fa.Count();
+
+            ViewBag.sl = sl;
+            return View(fa.ToList().Where(r => r.Status == true));
+        }
+
         public ActionResult NienKhoa(int ?id)
         {
             var detai = from dt in db.AcademicYear select dt;
@@ -70,6 +83,18 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
             return PartialView();
         }
 
+        public ActionResult Year(int ?id)
+        {
+
+            var year = from s in db.GraduationReport
+                       join c in db.AcademicYear on s.YearID equals c.YearID
+                       where s.YearID == id
+                       select s;
+            var sl = year.Count();
+
+            ViewBag.sl = sl;
+            return View(year.ToList().Where(r => r.Status == true));
+        }
 
         public ActionResult KhoaVien()
         {
@@ -79,13 +104,22 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
         }
         public ActionResult TrangDanhMucBaoCao(int? id)
         {
-            var dt =  from s in db.GraduationReport
-                      join p in db.Faculty
-                      on s.FacultyID equals p.FacultyID
-                      join n in db.AcademicYear on s.YearID equals n.YearID
-                      where s.FacultyID == id
-                      select s;
-            return View(dt);
+            var dt = from c in db.Class
+                     join r in db.GraduationReport on c.ClassID equals r.ClassID
+                     join f in db.Faculty on c.FacultyID equals f.FacultyID
+                     join y in db.AcademicYear on r.YearID equals y.YearID
+                     where r.GraduationReportID == id
+                     select r;
+
+
+
+            //var dt =  from s in db.GraduationReport
+            //          join p in db.Faculty
+            //          on s.FacultyID equals p.FacultyID
+            //          join n in db.AcademicYear on s.YearID equals n.YearID
+            //          where s.FacultyID == id
+            //          select s;
+            return View(dt.Where(r => r.Status == true));
         }
         public ActionResult Search(String search = "")
         {

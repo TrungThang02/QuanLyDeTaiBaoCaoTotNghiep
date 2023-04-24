@@ -519,6 +519,8 @@
     <Content Include="Views\Documents\BaoCaoXemNhieu.cshtml" />
     <Content Include="Views\Documents\BaoCaoTaiNhieu.cshtml" />
     <Content Include="Views\Shared\_LayoutInfo.cshtml" />
+    <Content Include="Views\Home\Year.cshtml" />
+    <Content Include="Views\Home\Faculty.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

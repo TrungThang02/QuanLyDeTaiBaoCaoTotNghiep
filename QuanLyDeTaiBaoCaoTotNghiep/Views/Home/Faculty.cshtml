@@ -1,28 +1,14 @@
-﻿@using QuanLyDeTaiBaoCaoTotNghiep.Models;
-@using PagedList.Mvc;
-
-
-@model PagedList.PagedList<GraduationReport>
-
+﻿
 @{
-    ViewBag.Title = "Index";
+    ViewBag.Title = "Faculty";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-<style>
-    hr {
-        background-color: #333;
-      
-        height:1px;
-        margin:  0;
-        margin-bottom : 2px;
-    }
-    .tieude{
-        font-weight : bold;
-    }
-</style>
+
+
+
 <div class="bcgd" style="margin-top : 20px">
 
-    <h5 class="text-center">BÁO CÁO MỚI NHẤT</h5>
+    <h5 class="text-center bx-font-size">Tìm thấy @ViewBag.sl báo cáo</h5>
 
 </div>
 
@@ -33,7 +19,7 @@
             <div class="col-md-3 col-sm-6">
                 <div class="product-grid">
                     <div class="product-image">
-                      
+
                         <a href="/Documents/CheckTypeFile/@dt.GraduationReportID">
                             <img src="~/Content/images/AnhBaoCao/@dt.Image">
                         </a>
@@ -43,12 +29,12 @@
                         <div class="text">
                             <a href="/Documents/CheckTypeFile/@dt.GraduationReportID" class="tieude"> @dt.GraduationReportName</a>
                         </div>
-                        <hr/>
+                        <hr />
                         <div class="view">
                             <span><i class="fa-regular fa-eye"></i> @dt.ViewCount</span>
                             <span><i class="fa-solid fa-download"></i> @dt.DownloadCount</span>
                         </div>
-                       
+
 
                     </div>
                 </div>
@@ -58,16 +44,4 @@
 </div>
 
 
-<div class="list">
-    <div class="MenuTrang">
-        @Html.PagedListPager(Model, page => Url.Action("Index", "Documents", new { page = page }))
-    </div>
-</div>
-<style>
-    .MenuTrang {
-        margin-top: 500px;
-        display: inline;
-        text-align: center;
-        width: 100%;
-    }
-</style>
+

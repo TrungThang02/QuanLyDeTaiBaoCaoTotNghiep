@@ -9,7 +9,8 @@ using PagedList;
 using System.IO;
 using System.Data;
 using System.Text;
-
+using System.Net.Mail;
+using System.Net;
 
 namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
 {
@@ -30,7 +31,7 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
             int iSize = 12;
             int iPageNum = (page ?? 1);
 
-            var d = (from t in db.GraduationReport select t).OrderByDescending(t => t.UploadDate).Where(r => r.Status == true);
+            var d = (from t in db.GraduationReport select t).OrderBy(t => t.UploadDate).Where(r => r.Status == true);
    
 
             return View(d.OrderBy(s=> s.GraduationReportID).ToPagedList(iPageNum, iSize));
@@ -108,7 +109,7 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
         // To protect from overposting attacks, enable the specific properties you want to bind to, for 
         // more details see https://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ValidateInput(false)]
-        public ActionResult Create(GraduationReport baocao, HttpPostedFileBase image, HttpPostedFileBase file, FormCollection f)
+        public ActionResult Create(GraduationReport baocao, HttpPostedFileBase image, HttpPostedFileBase file, FormCollection f, string email)
         {
 
          
@@ -181,7 +182,75 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
                     baocao.YearID = Convert.ToInt32(f["YearID"]);
                     db.GraduationReport.Add(baocao);
                     db.SaveChanges();
+
+
+
+
+
+
+
+                    ////gỬI MAIL 
+                    //string to = "trantrungthang01699516993@gmail.com";
+                    ////string from = Session["Email"].ToString();
+                    //string from = "thangpy2k2@gmail.com";
+
+                    //string subject = "THÔNG BÁO !!!"; // chủ đề email
+                    //string mes = "Có báo cáo mới vừa được tải lên hệ thống !"; // nội dung email
+
+                    //// Khởi tạo đối tượng MailMessage
+                    //// Khởi tạo đối tượng SmtpClient và gửi email
+                    //SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587); // SMTP server và cổng của email
+                    //smtpClient.Credentials = new NetworkCredential("trantrungthang01699516993@gmail.com", "iauopfthcsrhnunj"); // địa chỉ email và mật khẩu
+                    //smtpClient.EnableSsl = true; // kích hoạt SSL cho kết nối SMTP
+
+
+
+                    //using (var message = new MailMessage(from, to)
+                    //{
+                    //    Subject = subject,
+                    //    Body = mes,
+                    //    IsBodyHtml = true
+                    //})
+                    //    smtpClient.Send(message);
+
+
+
+                    var fromEmail = new MailAddress("trantrungthang01699516993@gmail.com", "Hệ thống quản lí đề tài báo cáo tốt nghiệp -  TDMU");
+                    string toEmail = "2024801030146@student.tdmu.edu.vn";
+
+                    string link = "http://trungthangnckh-001-site1.dtempurl.com/";
+
+                    string bc = baocao.GraduationReportName;
+
+                    string  subject = "THÔNG BÁO !!!";
+                    string body = "Người dùng vừa tải báo cáo lên hệ thống <br /> Tên báo cáo :" + bc + "  <br /> Bạn có thể quản lí <a href='" + link + "'> tại đây </a>";
+
+
+
+                    var smtp = new SmtpClient
+                    {
+                        Host = "smtp.gmail.com",
+                        Port = 587,
+                        EnableSsl = true,
+                        DeliveryMethod = SmtpDeliveryMethod.Network,
+                        UseDefaultCredentials = true,
+                        Credentials = new NetworkCredential(fromEmail.Address, "iauopfthcsrhnunj")
+                    };
+                    using (var message = new MailMessage(fromEmail.ToString(), toEmail)
+                    {
+                        Subject = subject,
+                        Body = body,
+                        IsBodyHtml = true
+                    })
+                        smtp.Send(message);
+
+
+
+
                     return Redirect("/User/Info/" + Session["TaiKhoan3"]);
+
+
+
                 }
 
                 return View();
@@ -349,9 +418,10 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
 
             string fullName = Server.MapPath("~/File/" + filePath);
 
+            int layduoifile = filePath.LastIndexOf('.');
             byte[] fileBytes = GetFile(fullName);
             return File(
-                fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, filePath);
+                fileBytes, System.Net.Mime.MediaTypeNames.Application.Octet, document.GraduationReportName + "." + filePath.Substring(layduoifile + 1));
         }
 
         byte[] GetFile(string s)

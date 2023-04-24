@@ -28,9 +28,10 @@
 
 
                 <td>
-                    @Html.ActionLink("Chi tiết", "Details", new { id = report.GraduationReportID }, new { @class = "btn btn-info" })
-                    <a data-id="@report.GraduationReportID" class="btn btn-danger delete">Xóa</a>
-                    <a data-id="@report.GraduationReportID" class="btn btn-success app">Duyệt</a>
+                    <a href="/Documents/CheckTypeFile/@report.GraduationReportID" class = "btn btn-info">Chi tiết</a>
+                        @*@Html.ActionLink("Chi tiết", "Details", new { id = report.GraduationReportID }, new { @class = "btn btn-info" })*@
+                        <a data-id="@report.GraduationReportID" class="btn btn-danger delete">Xóa</a>
+                        <a data-id="@report.GraduationReportID" class="btn btn-success app">Duyệt</a>
 
                 </td>
             </tr>

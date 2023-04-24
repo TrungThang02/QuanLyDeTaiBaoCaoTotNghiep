@@ -149,7 +149,7 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Areas.Admin.Controllers
                 baocao.UploadDate = Convert.ToDateTime(f["dNgayCapNhat"]);
                    baocao.Author = f["tentacgia"];
                     //sach.NgayCapNhat = Convert.ToDateTime(f["dNgayCapNhat"]);
-
+                    baocao.Status = true;
 
                     baocao.ClassID = Convert.ToInt32(f["ClassID"]);
                 baocao.FacultyID = Convert.ToInt32(f["FacultyID"]);
@@ -261,7 +261,7 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Areas.Admin.Controllers
                     baocao.UploadDate = Convert.ToDateTime(f["dNgayCapNhat"]);
                     //sach.NgayCapNhat = Convert.ToDateTime(f["dNgayCapNhat"]);
 
-
+                    baocao.Status = true;
                     baocao.ClassID = Convert.ToInt32(f["ClassID"]);
                     baocao.FacultyID = Convert.ToInt32(f["FacultyID"]);
                     baocao.YearID = Convert.ToInt32(f["YearID"]);

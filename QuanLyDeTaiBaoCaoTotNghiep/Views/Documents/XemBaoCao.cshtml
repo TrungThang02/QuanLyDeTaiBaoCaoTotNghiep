@@ -99,65 +99,62 @@
                         <iframe id="myFrame" src="~/ViewerJS/#../File/@Model.UrlFile" style="width:100%; height:800px" class="embed-responsive-item"></iframe>
                         @*<iframe id="myFrame" onload="resizeIframe(this)" class="embed-responsive-item" src="https://localhost:44337/File/@Model.UrlFile" style="width:100%; height:800px; border: 1px #ddd solid; border-right: 3px #ddd solid"></iframe>*@
 
-
+                        <div>
+                            <h4 class="text-primary font-weight-bold text-uppercase mt-3">Mô Tả</h4>
+                            <p>@Model.Description</p>
+                        </div>
                     </div>
-      
-
-
-
-
-                    
-                        <!-- Thêm các liên kết chia sẻ trên các mạng xã hội khác -->
-    
-
+                
                     <div class="col-lg-3">
 
                         <button class="btn btn-danger btn-rounded mb-3 btn-icon-text btn-block text-capitalize"><i class="fa-solid fa-download"></i><a href="~/Documents/DownloadFile?filePath=@Model.UrlFile" style="color:#fff"> Tải xuống</a></button>
-                        
+
                         <style>
-                            .share{
-             
-                                padding : 5px;
-        
-                                margin-bottom : 1rem;
-                                display : flex;
+                            .share {
+                                padding: 5px;
+                                margin-bottom: 1rem;
+                                display: flex;
                                 justify-content: space-around;
-                                align-items : center;
+                                align-items: center;
                             }
-                            .mxh{
-                                
-                                display :flex;
-                                justify-content : space-between;
+
+                            .mxh {
+                                display: flex;
+                                justify-content: space-between;
                             }
+
                             .item {
                                 background: #333;
                                 margin-right: 20px;
                                 border-radius: 50%;
                             }
+
                                 .item a i {
                                     padding: 8px;
                                     color: #fff;
                                     font-size: 20px;
-                                   
                                 }
+
                             .a {
                                 background: #2374e1;
                             }
+
                             .d {
                                 background: #1d9bf0;
                             }
+
                             .c {
                                 background: rgb(10,102,194);
                             }
 
-                            .n a:hover{
-                                cursor : unset;
+                            .n a:hover {
+                                cursor: unset;
                             }
                         </style>
                         <div class="share">
-                          
-                           
-                            
+
+
+
                             <div class="mxh">
                                 <div class="item n">
                                     <a href="#">
@@ -180,8 +177,8 @@
                                     </a>
                                 </div>
                             </div>
-                                </div>
-                      
+                        </div>
+
 
 
                         <div class="relate-doc col-lg-12 col-sm-5 float-lg-none float-sm-left">
