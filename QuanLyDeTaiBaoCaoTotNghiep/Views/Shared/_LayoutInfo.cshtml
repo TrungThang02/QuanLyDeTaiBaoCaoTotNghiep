@@ -33,6 +33,17 @@
     <!-- Template styles-->
     <link rel="stylesheet" href="~/Content/css/style.css">
     <style>
+        .text a {
+            width: 200px;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            line-height: 23px;
+            -webkit-line-clamp: 3;
+            height: 68px;
+            display: -webkit-box;
+            -webkit-box-orient: vertical;
+        }
+
         @@media (prefers-reduced-motion: reduce) {
             .fade {
                 transition: opacity 0.15s linear;

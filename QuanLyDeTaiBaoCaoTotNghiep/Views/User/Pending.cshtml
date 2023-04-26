@@ -12,6 +12,7 @@
 }
 
 
+
 <!DOCTYPE html>
 
 <html>
@@ -170,59 +171,9 @@
 <body>
     <div class="container mt-2 mb-2">
         <div class="info-item">
-            <div class="info col-lg-3">
-                <div class="d">
-                    <center>
-                        <img src="https://cdn-icons-png.flaticon.com/512/6596/6596121.png" alt="Alternate Text" width="150px" />
-                    </center>
-                    <h5 align="center">@name</h5>
-                </div>
-                <div class="d">
-                    <div class="items"><a href="/User/Thaydoithongtin/@id">Cập nhật thông tin</a></div>
-
-                </div>
-                <hr />
-                <div>
-                    <div class="py-3">
-                        <p class="clearfix">
-                            <span class="float-left">
-                                Tổng báo cáo
-                            </span>
-                            <span class="float-right">
-                                @ViewBag.totalReport
-                            </span>
-                        </p>
-                        <p class="clearfix">
-                            <span class="float-left">
-                                Lượt xem
-                            </span>
-                            <span class="float-right">
-                                @ViewBag.totalView
-                            </span>
-                        </p>
-                        <p class="clearfix">
-                            <span class="float-left">
-                                Tải xuống
-                            </span>
-                            <span class="float-right">
-                                @ViewBag.totalDown
-                            </span>
-                        </p>
-                    </div>
-
-                    <div class="d">
-                        <div class="items"><a href="/Documents/Create">Tải lên báo cáo</a></div>
-
-                    </div>
-                </div>
-
-            </div>
-
-
-
-            <div class="row justify-content-center col-lg-9">
-                <div class="alert alert-primary" role="alert" style="width : 100%; align-items :center; height: fit-content">
-                    Bạn có <a href="/User/Pending/@id" class="alert-link"><b>  @ViewBag.pending báo cáo </b></a>đang đợi duyệt !
+            <div class="row justify-content-center col-lg-12">
+                <div class="alert alert-primary" role="alert" style="width : 100%; align-items :center">
+                    Bạn có <a href="#" class="alert-link"><b>  @ViewBag.pending báo cáo </b></a>đang đợi duyệt !
                 </div>
                 @foreach (var dt in Model)
                 {

@@ -66,6 +66,9 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
             document.ViewCount++;
             db.SaveChanges();
 
+            string currentUrl = Request.Url.AbsoluteUri;
+            ViewBag.CurrentUrl = currentUrl;
+
             var dt = from s in db.GraduationReport where s.GraduationReportID == id select s;
 
             return View(dt.Single());
@@ -81,6 +84,8 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
             var document = db.GraduationReport.Find(id);
             document.ViewCount++;
             db.SaveChanges();
+            string currentUrl = Request.Url.AbsoluteUri;
+            ViewBag.CurrentUrl = currentUrl;
             var dt = from s in db.GraduationReport where s.GraduationReportID == id select s;
             return View(dt.Single());
         }

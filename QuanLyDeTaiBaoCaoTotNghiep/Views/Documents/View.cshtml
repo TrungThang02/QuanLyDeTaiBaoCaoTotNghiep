@@ -65,7 +65,18 @@
         <div class="col-12">
             <div class="card-body">
                 <div>
+                    <div class="breadcrumb">
 
+                        <a href="@Url.Action("Index", "GraduationReport")" class="breadcrumb-item" style="color:blue !important">Trang chủ </a>/
+                        @if (ViewBag.CurrentUrl != null)
+                        {
+                            var urls = ViewBag.CurrentUrl.Split('/');
+                            var controller = urls[3];
+                            var action = urls[4];
+                            <a href="@Url.Action(action, controller)"> Xem Tài liệu</a>
+                        }
+
+                    </div>
 
                 </div>
                 <div class="row">

@@ -521,6 +521,7 @@
     <Content Include="Views\Shared\_LayoutInfo.cshtml" />
     <Content Include="Views\Home\Year.cshtml" />
     <Content Include="Views\Home\Faculty.cshtml" />
+    <Content Include="Views\User\Pending.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

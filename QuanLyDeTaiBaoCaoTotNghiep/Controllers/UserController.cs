@@ -426,6 +426,9 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
                 int totalReport = db.GraduationReport.Where(r => r.ID == id).Count();
                 ViewBag.totalReport = totalReport;
 
+                int pending = db.GraduationReport.Where(r => r.ID == id).Where(r => r.Status == false).Count();
+                ViewBag.pending = pending;
+
             }
             catch(Exception)
             {
@@ -435,8 +438,38 @@ namespace QuanLyDeTaiBaoCaoTotNghiep.Controllers
 
 
             var bc = from s in db.GraduationReport where s.ID == id select s;
-            return View(bc.OrderBy(s => s.GraduationReportID).ToPagedList(iPageNum, iSize).ToList());
+            return View(bc.Where(r => r.Status == true).OrderBy(s => s.GraduationReportID).ToPagedList(iPageNum, iSize).ToList());
         }
+
+
+        public ActionResult Pending(int? id)
+        {
+           
+            if (idInfo != id)
+            {
+                return RedirectToAction("PageNotFound", "Error");
+
+            }
+
+            try
+            {
+                
+                int pending = db.GraduationReport.Where(r => r.ID == id).Where(r => r.Status == false).Count();
+                ViewBag.pending = pending;
+
+            }
+            catch (Exception)
+            {
+
+            }
+
+
+
+            var bc = from s in db.GraduationReport where s.ID == id select s;
+            return View(bc.Where(r => r.Status == false).ToList());
+        }
+
+
 
         public ActionResult Thaydoithongtin(int? id)
         {

@@ -55,6 +55,10 @@
         width: 120px;
         height: auto;
     }
+    a{
+        color : #333;
+    }
+
 </style>
 
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css" integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w==" crossorigin="anonymous" referrerpolicy="no-referrer" />
@@ -65,7 +69,18 @@
         <div class="col-12">
             <div class="card-body">
                 <div>
-
+                    <div class="breadcrumb">
+                        
+                            <a href="@Url.Action("Index", "GraduationReport")" class="breadcrumb-item" style="color:blue !important">Trang chủ </a>/
+                            @if (ViewBag.CurrentUrl != null)
+                            {
+                                var urls = ViewBag.CurrentUrl.Split('/');
+                                var controller = urls[3];
+                                var action = urls[4];
+                               <a href="@Url.Action(action, controller)"> Xem Tài liệu</a>
+                            }
+                        
+                    </div>
 
                 </div>
                 <div class="row">
